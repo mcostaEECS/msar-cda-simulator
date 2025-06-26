@@ -20,10 +20,6 @@ msar-cda-simulator/
 ├── LICENSE # MIT License
 └── README.md # You are here
 
-@unpublished{Costa2025MSAR,
-  author       = {Marcello G. Costa and others},
-  title        = {Generalized Multi-temporal Change Detection with Markov-switching Autoregressive (AR) Model},
-  note         = {Manuscript submitted for publication},
-  year         = {2025}
-}
+> **"Generalized Multi-temporal Change Detection with Markov-switching Autoregressive (AR) Model"**  
+> M. G. Costa *et al.*, manuscript in preparation, 2025.
 
