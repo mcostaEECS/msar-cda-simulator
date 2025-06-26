@@ -9,11 +9,19 @@ The simulator supports different MS-AR model variants, including:
 - `MSAR`  →  (k = 11, ℓ = 1, h = 0)  
 - `MSARk` →  (k = 23, ℓ = 2, h = 0)  
 - `MSARkh` →  (k = 23, ℓ = 2, h = 1)
+<<<<<<< HEAD
+
+---
+
+## 📁 Repository Structure
+=======
+>>>>>>> 18816c1 (README update)
 
 ---
 
 ## 📁 Repository Structure
 
+```
 msar-cda-simulator/
 ├── main_simulation/        # Main simulation engine over full dataset
 │   └── run_main_simulation.py
@@ -26,9 +34,18 @@ msar-cda-simulator/
 ├── requirements.txt        # Python dependencies
 ├── LICENSE                 # MIT License
 └── README.md               # Project overview and instructions
+<<<<<<< HEAD
 
 ## 🚀 How to Run
 
+=======
+```
+
+---
+
+## 🚀 How to Run
+
+>>>>>>> 18816c1 (README update)
 ### 1. Install Dependencies
 
 ```bash
@@ -38,7 +55,11 @@ pip install -r requirements.txt
 ### 2. Run Main Simulation
 
 ```bash
+<<<<<<< HEAD
 python main_simulation/main.py
+=======
+python main_simulation/run_main_simulation.py
+>>>>>>> 18816c1 (README update)
 ```
 
 ### 3. Run Classifier and ROC Analysis
