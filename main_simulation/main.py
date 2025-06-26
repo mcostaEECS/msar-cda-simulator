@@ -44,14 +44,14 @@ def msarSim(test_type, N, K):
     
     path = 'results/logs/'
 
-    nroPairs = 1
+    nroPairs = 24
     dimH = 3000; dimW = 2000
   
             
     TEST_time=[]; CFAR_time = []; Nop=[]
     bar = pyprind.ProgBar(nroPairs, monitor=True, title=campaign)
     for s in range(nroPairs):
-        s = s + 15
+        #s = s + 15
         
         
         par=load_data(test_type)[s]
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
      
     test_type = ['MSAR', 'MSARk', 'MSARkh']
-    test_type  = test_type[2]
+    test_type  = test_type[0]
     K = 9
     N = 250
     msarSim(test_type, N, K)
