@@ -22,4 +22,8 @@ msar-cda-simulator/
 
 > **"Generalized Multi-temporal Change Detection with Markov-switching Autoregressive (AR) Model"**  
 > M. G. Costa *et al.*, manuscript in preparation, 2025.
+>
+> # Install the requirements
+> pip install -r requirements.txt
+
 
