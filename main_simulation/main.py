@@ -42,7 +42,7 @@ def msarSim(test_type, N, K):
     campaignRuntime = 'Runtime_%s_N_%d_K_%d'%(test_type, N, K)
     campaignPower = '%s_N_%d_K_%d'%(test_type, N, K)
     
-    path = '/home/marcello-costa/workspace/kthSim/Output/logs/'
+    path = '/results/logs/'
 
     nroPairs = 1
     dimH = 3000; dimW = 2000
@@ -70,13 +70,13 @@ def msarSim(test_type, N, K):
         with open(name_file, 'a') as f:
             
             if test_type == 'MSAR':
-                pathOut = '/home/marcello-costa/workspace/kthSim/Output/DataMSAR/'
+                pathOut = '/results/dataMSAR/'
                 lags = 11
             elif test_type == 'MSARk':
-                pathOut = '/home/marcello-costa/workspace/kthSim/Output/DataMSARk/'
+                pathOut = '/results/dataMSARk/'
                 lags = 23
             elif test_type == 'MSARkh':
-                pathOut = '/home/marcello-costa/workspace/kthSim/Output/DataMSARkh/'
+                pathOut = '/results/dataMSARkh/'
                 lags = 23
            
             
