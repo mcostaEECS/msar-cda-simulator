@@ -42,7 +42,7 @@ def msarSim(test_type, N, K):
     campaignRuntime = 'Runtime_%s_N_%d_K_%d'%(test_type, N, K)
     campaignPower = '%s_N_%d_K_%d'%(test_type, N, K)
     
-    path = '/results/logs/'
+    path = 'results/logs/'
 
     nroPairs = 1
     dimH = 3000; dimW = 2000
@@ -70,13 +70,13 @@ def msarSim(test_type, N, K):
         with open(name_file, 'a') as f:
             
             if test_type == 'MSAR':
-                pathOut = '/results/dataMSAR/'
+                pathOut = 'results/dataMSAR/'
                 lags = 11
             elif test_type == 'MSARk':
-                pathOut = '/results/dataMSARk/'
+                pathOut = 'results/dataMSARk/'
                 lags = 23
             elif test_type == 'MSARkh':
-                pathOut = '/results/dataMSARkh/'
+                pathOut = 'results/dataMSARkh/'
                 lags = 23
            
             
@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
      
     test_type = ['MSAR', 'MSARk', 'MSARkh']
-    test_type  = test_type[1]
+    test_type  = test_type[0]
     K = 9
     N = 250
     msarSim(test_type, N, K)
