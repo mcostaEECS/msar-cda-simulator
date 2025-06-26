@@ -1,0 +1,1 @@
+MSARk;N_250;K_9;pair_15;runtime_per_regime_1.3219130972157354;runtime_total_30.404001235961914
