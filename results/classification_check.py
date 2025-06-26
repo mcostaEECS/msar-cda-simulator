@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import cv2
 import os
-from tools.load_data import load_data
+from load_data import load_data
 import scipy.io as sio
 from skimage.morphology import disk
 from skimage.filters.rank import median
