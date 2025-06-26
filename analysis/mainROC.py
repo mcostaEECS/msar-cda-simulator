@@ -5,9 +5,7 @@ from matplotlib import pyplot as plt
 import array
 import scipy.io
 import scipy.io as io
-#from GLRT import GLRT
 import os
-#from LMP import LMP
 from load_data import load_data
 import pyprind
 import re
@@ -29,12 +27,12 @@ def ROC(th, window, test_type):
 
 
     if test_type == 'MSAR':
-        path = 'results/dataMSAR/'
+        path = 'results/MSAR/'
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/'
     elif test_type == 'MSARkh':
         path = 'results/dataMSARkh/'
-             
+   
 
     files_icd = [i for i in os.listdir(path) if i.endswith('.mat')]
     nroPairs = len(files_icd)
@@ -61,6 +59,7 @@ def ROC(th, window, test_type):
           
                     par=load_data(test_type)[pair]
                     
+                    #tp=par[18]; tp =  np.fliplr(tp); TP =par[19]; #pair = par[-1]
                     tp=par[23]; tp =  np.fliplr(tp); TP =par[24]
                     
                     
@@ -68,8 +67,8 @@ def ROC(th, window, test_type):
                     ICD=ImageRead1['ICD']
                     
                     t = ICD.mean(axis=0).mean(axis=0)
-                    
-                
+  
+    
                     [dt, fa, mt]=Classifier(ICD,tp,th, test_type)
                     pd_partial = dt/25; far_partial = fa/6
                     res = 'Pair_'+str(pair)+';'+'detected_targets_'+str(dt)+';'+'pd_'+str(pd_partial)+';'+'false_target_'+str(fa)+';'+'far_'+str(far_partial)+';'+'missed_target_'+str(25-dt)
@@ -95,9 +94,15 @@ def ROC(th, window, test_type):
 
 if __name__ == "__main__":
 
-    test_type = ['MSAR', 'MSARk', 'MSARkh']
+       
+    
+    
+    test_type = ['MSAR',  'MSARk', 'MSARkh']
     test_type  = test_type[0]
     
+
+    
+
     N = 250
     K = 9
     
@@ -105,10 +110,23 @@ if __name__ == "__main__":
     pathOut = 'results/ROC/'
     id = pathOut+campaign+'.mat'
 
-    pfa_min = 0.5; pfa_max = 3.6
-    pfa_range = np.arange(pfa_min, pfa_max,0.25)
+    pfa_min = 0.5; pfa_max = 2.6
+    
+    #pfa_min = 0.5; pfa_max = 3.6
+    
+    
+    
+    
+    
+    
+    pfa_range = np.arange(pfa_min, pfa_max,0.25)#[::-1]
     
 
+ 
+    
+    
+   
+   
     start_time = time.perf_counter()
 
     PD=[]
@@ -117,15 +135,20 @@ if __name__ == "__main__":
 
     nroTh = len(pfa_range)
 
+    # bar = pyprind.ProgBar(nroTh, monitor=True, title=campaign)
+
     for i in range(len(pfa_range)):
             [pd, far, Res]= ROC(pfa_range[i], N, test_type)
+
+
+            
             PD.append(pd)
             FAR.append(far)
             RES.append(Res)  # .mat
 
             # bar.update()
 
-
+ 
     finish_time = time.perf_counter()
     print(f"Program finished in {(finish_time - start_time):.3f} seconds")
 
@@ -141,3 +164,12 @@ if __name__ == "__main__":
     scipy.io.savemat(id,results) 
 
 
+
+
+
+   
+
+
+            
+    
+    
