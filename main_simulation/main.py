@@ -46,8 +46,7 @@ def msarSim(test_type, N, K):
 
     nroPairs = 1
     dimH = 3000; dimW = 2000
-    
-   
+  
             
     TEST_time=[]; CFAR_time = []; Nop=[]
     bar = pyprind.ProgBar(nroPairs, monitor=True, title=campaign)
@@ -124,7 +123,7 @@ def msarSim(test_type, N, K):
             for k in range(len(IrefParallel)):
                 set_start_method('fork', force=True)
                 try:
-                    pool = Pool(8) # the number of cores has been greatar than 8
+                    pool = Pool(8) 
                     CD = pool.starmap(MSARk, zip(IrefParallel[k])) 
                     
                     
@@ -167,9 +166,6 @@ def msarSim(test_type, N, K):
                             
             f.write(str(test_type)+';'+'N_'+str(N)+';'+'K_'+str(K)+';'+'pair_'+str(s)+';'+'runtime_per_regime_'+str(np.sum(ar))+';'+'runtime_total_'+str(np.sum(an))+'\n')
             bar.update()
-                
-           
-         
                 
             TEST_time.append(np.sum(ar))
             CFAR_time.append(np.sum(an))
