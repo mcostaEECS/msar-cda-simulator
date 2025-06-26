@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
      
     test_type = ['MSAR', 'MSARk', 'MSARkh']
-    test_type  = test_type[0]
+    test_type  = test_type[1]
     K = 9
     N = 250
     msarSim(test_type, N, K)
