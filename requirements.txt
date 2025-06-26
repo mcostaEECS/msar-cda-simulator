@@ -2,7 +2,9 @@ numpy
 scipy
 matplotlib
 opencv-python
+Pillow
 scikit-image
 pyprind
 statsmodels
+psutil
 torch
