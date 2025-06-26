@@ -25,5 +25,8 @@ msar-cda-simulator/
 >
 > # Install the requirements
 > pip install -r requirements.txt
+>
+> 🔗 **Project page**: [mcostaEECS/msar-cda-simulator](https://github.com/mcostaEECS/msar-cda-simulator)
+
 
 
