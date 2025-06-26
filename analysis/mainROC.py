@@ -27,7 +27,7 @@ def ROC(th, window, test_type):
 
 
     if test_type == 'MSAR':
-        path = 'results/MSAR/'
+        path = 'results/dataMSAR/'
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/'
     elif test_type == 'MSARkh':
