@@ -110,8 +110,8 @@ def ClassifierLocal(ICD,tp,pfa, TestType, pair, TP):
                 ax1.add_patch(circleDetected)
                 
             plt.axis("off") 
-            #path='/home/marcello-costa/workspace/kthSim/classDec/'
-            #f.savefig(path + 'Class_%s_%s.png'%(TestType, pair), dpi=350,bbox_inches='tight',transparent=True, pad_inches=0)
+            path='/results/plots/'
+            f.savefig(path + 'Class_%s_%s.png'%(TestType, pair), dpi=350,bbox_inches='tight',transparent=True, pad_inches=0)
             f.tight_layout()
             plt.show()
 
@@ -141,16 +141,16 @@ if __name__ == "__main__":
             
     
     if test_type == 'MSAR':
-        path = '/home/marcello-costa/workspace/kthSim/Output/DataMSAR/'
+        path = '/results/dataMSAR/'
         pfa=0.8 # due \ell=1
         
         
     elif test_type == 'MSARk':
-        path = '/home/marcello-costa/workspace/kthSim/Output/DataMSARk/'
+        path = '/results/dataMSARk/'
         pfa=2.2 # due \ell=2
         
     elif test_type == 'MSARkh':
-        path = '/home/marcello-costa/workspace/kthSim/Output/DataMSARkh/'
+        path = '/results/dataMSARkh/'
         pfa=2.2 # due \ell=2
    
     name = 'ICD_%s_N_%d_K_%d_tp_%s_pair_%d'%(test_type,N,K,tp, pair)
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     ICD=ImageReadCD['ICD']
 
     ICD = ICD.reshape(3000, 2000)
-    path2 = '/home/marcello-costa/workspace/kthSim/data/alvos/'
+    path2 = '/data/targets/'
     
     
     if tp == 'S1':

@@ -3,8 +3,8 @@ import scipy.io as sio
 
 def load_data(test_type):
 
-    path = '/home/marcello-costa/workspace/kthSim/data/'
-    path2 = '/home/marcello-costa/workspace/kthSim/data/alvos/'
+    path = '/data/'
+    path2 = '/data/targets/'
     
     # images of mission by pair
     ImageRead1=sio.loadmat(path+'ImageRead1.mat')
