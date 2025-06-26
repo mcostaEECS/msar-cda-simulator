@@ -116,7 +116,7 @@ def msarSim(test_type, N, K):
                     a.append(TestPairs)
                 IrefParallel.append(a)
                 
-            #------------------------ Parallel Processing MASTER -------------------------#
+            #------------------------ Parallel Processing  -------------------------#
             START = time.time()
             cnt = 0
             CDn = []
