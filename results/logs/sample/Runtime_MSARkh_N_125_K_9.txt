@@ -16,3 +16,6 @@ MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05904613370480745;runtime_total_1.3
 MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05865249426468559;runtime_total_1.3490073680877686
 MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05890208741892939;runtime_total_1.354748010635376
 MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05916594422381857;runtime_total_1.3608167171478271
+MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05467291500257409;runtime_total_1.257477045059204
+MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.061701629472815475;runtime_total_1.4191374778747559
+MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.06699769393257472;runtime_total_1.5409469604492188

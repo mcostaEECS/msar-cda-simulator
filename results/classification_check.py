@@ -157,7 +157,7 @@ if __name__ == "__main__":
         
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/'
-        pfa=2.25 # due \ell=2
+        pfa=2.25# due \ell=2
         
     elif test_type == 'MSARkh':
         path = 'results/dataMSARkh/'

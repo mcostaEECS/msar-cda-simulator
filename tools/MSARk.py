@@ -473,7 +473,7 @@ def MSARk(Data):
     x_p = np.percentile(OutAvgVec, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(OutAvgVec, [30, 90]) #25, 75
+    quartile_1, quartile_3 = np.percentile(OutAvgVec, [10, 90]) 
     
     iqr = quartile_3 - quartile_1
     
