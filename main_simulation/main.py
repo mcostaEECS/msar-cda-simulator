@@ -1,5 +1,6 @@
 from __future__ import division
 
+
 # Core libraries
 import numpy as np
 import time
@@ -26,9 +27,9 @@ from concurrent.futures import ProcessPoolExecutor
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from tools.load_data import load_data
 from tools.MSARk import MSARk
+
 
 
 #------------------------- Split Image ------------------------#
@@ -187,7 +188,7 @@ if __name__ == "__main__":
 
      
     test_type = ['MSAR', 'MSARk', 'MSARkh']
-    test_type  = test_type[2]
+    test_type  = test_type[0]
     K = 9
     N = 250
     msarSim(test_type, N, K)

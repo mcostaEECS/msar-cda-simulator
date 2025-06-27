@@ -193,7 +193,7 @@ if __name__ == "__main__":
      
     test_type = ['MSAR', 'MSARk', 'MSARkh']
     s = ['free', 'noise']
-    test_type  = test_type[2]
+    test_type  = test_type[1]
     K = 9
     N = 125
     msarSim(test_type, N, K, s[1])

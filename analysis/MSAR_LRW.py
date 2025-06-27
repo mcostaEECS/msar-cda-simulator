@@ -330,7 +330,7 @@ def MSARk(Data):
 
       
    
-    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
     
     #IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
     criteria = ['avg', 'min']
@@ -349,8 +349,8 @@ def MSARk(Data):
             res = ST1 - LT1 # change map from clutter reduction
             
         else:
-            ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])/2
-            LT1 = (arLTmin1[0] + arLTmin2[0])/2
+            ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])
+            LT1 = (arLTmin1[0] + arLTmin2[0])
             #LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
             
             res = ST1 - LT1 # change map from clutter reduction

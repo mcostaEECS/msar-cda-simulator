@@ -23,3 +23,5 @@ MSAR;N_250;K_9;pair_20;runtime_per_regime_1.3877562826330012;runtime_total_15.26
 MSAR;N_250;K_9;pair_21;runtime_per_regime_1.367205879905007;runtime_total_15.039264678955078
 MSAR;N_250;K_9;pair_22;runtime_per_regime_1.3745435801419346;runtime_total_15.11997938156128
 MSAR;N_250;K_9;pair_23;runtime_per_regime_1.4246463558890603;runtime_total_15.671109914779663
+MSAR;N_250;K_9;pair_15;runtime_per_regime_1.6578510241074995;runtime_total_18.236361265182495
+MSAR;N_250;K_9;pair_15;runtime_per_regime_1.4221035133708606;runtime_total_15.643138647079468

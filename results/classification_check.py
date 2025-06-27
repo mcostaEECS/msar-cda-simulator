@@ -131,7 +131,7 @@ def ClassifierLocal(ICD,tp,pfa, TestType, pair, TP):
 if __name__ == "__main__":
 
     test_type = ['MSAR',  'MSARk', 'MSARkh']
-    test_type  = test_type[2]
+    test_type  = test_type[0]
     N = 250
     K = 9
     pair =15
@@ -157,11 +157,11 @@ if __name__ == "__main__":
         
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/'
-        pfa=2.2 # due \ell=2
+        pfa=2.25 # due \ell=2
         
     elif test_type == 'MSARkh':
         path = 'results/dataMSARkh/'
-        pfa=2.2 # due \ell=2
+        pfa=2.25 # due \ell=2
    
     name = 'ICD_%s_N_%d_K_%d_tp_%s_pair_%d'%(test_type,N,K,tp, pair)
 

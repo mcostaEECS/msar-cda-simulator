@@ -42,7 +42,7 @@ def ClassifierLocal(ICD,tp,pfa, TestType, pair, TP, N):
 
             #Morphologic operators
             kernel1= cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
-            kernel2= cv2.getStructuringElement(cv2.MORPH_RECT,(3,3))
+            kernel2= cv2.getStructuringElement(cv2.MORPH_RECT,(5,5))
             erosion = cv2.erode(im_bwN,kernel1,iterations = 1)
             dilation1 = cv2.dilate(erosion,kernel1,iterations = 1)
             dilation2 = cv2.dilate(dilation1,kernel2,iterations = 1)
@@ -144,16 +144,16 @@ if __name__ == "__main__":
     
     if test_type == 'MSAR':
         path = 'results/dataMSAR/dataMSAR_sample/'
-        pfa=2.2 # due \ell=1
+        pfa=0.65# due \ell=1
         
         
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/dataMSARk_sample/'
-        pfa=4.5 # due \ell=2
+        pfa=1.5 # due \ell=2
         
     elif test_type == 'MSARkh':
         path = 'results/dataMSARkh/dataMSARkh_sample/'
-        pfa=4.5 # due \ell=2
+        pfa=3 # due \ell=2
    
     name = 'ICD_%s_N_%d_K_%d_tp_%s_pair_%d'%(test_type,N,K,tp, pair)
 

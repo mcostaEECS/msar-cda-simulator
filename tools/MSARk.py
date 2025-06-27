@@ -28,8 +28,11 @@ from matplotlib import pyplot as plt
 from concurrent.futures import ProcessPoolExecutor
 from torch.multiprocessing import Pool, set_start_method, freeze_support
 
-# Custom modules
-from load_data import load_data
+# Custom module
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from tools.load_data import load_data
 
 # Debugging / pretty print
 from pprint import pp
@@ -104,7 +107,7 @@ def MSARk(Data):
     arST = [ ar19, ar20, ar21, ar22, ar23] 
     
     
-    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:10] 
+    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4] 
     sST = [ IrefS, IrefT, IrefU, IrefV, IrefX] 
     
  
@@ -193,19 +196,19 @@ def MSARk(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes       
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:10]  # sorting
-        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:10]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
+        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
         
         CDmcAvg = []; CDmcMin=[]
         for i in range(len(TestVec)):
             ST1 = arST[IdxST[0]][i]; ST2=arST[IdxST[1]][i]; ST3=arST[IdxST[2]][i]; ST4=arST[IdxST[3]][i]
-            ST5=arST[IdxST[4]][i]
+    
                
                 
             LT1 = arLT[IdxLT[0]][i]; LT2=arLT[IdxLT[1]][i]; LT3=arLT[IdxLT[2]][i]; LT4=arLT[IdxLT[3]][i]
-            STr = ST1+ST2; LTr =  (LT2+LT3)/1
+            STr = ST1+ST2; LTr =  LT1+LT2
             res = STr - LTr 
             CDmcAvg.append(res)
             
@@ -291,19 +294,19 @@ def MSARk(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:10]  # sorting
-        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:10]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
+        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
         
         CDmcAvg = []; CDmcMin=[]
         for i in range(len(TestVec)):
             ST1 = arST[IdxST[0]][i]; ST2=arST[IdxST[1]][i]; ST3=arST[IdxST[2]][i]; ST4=arST[IdxST[3]][i]
-            ST5=arST[IdxST[4]][i]
+            
                
                 
             LT1 = arLT[IdxLT[0]][i]; LT2=arLT[IdxLT[1]][i]; LT3=arLT[IdxLT[2]][i]; LT4=arLT[IdxLT[3]][i]
-            STr = ST1+ST2; LTr =  (LT2+LT1)/1
+            STr = ST1+ST2; LTr =  LT2+LT1
             res = STr - LTr 
             CDmcAvg.append(res)
             
@@ -389,19 +392,19 @@ def MSARk(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:10]  # sorting
-        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:10]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
+        IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
         
         CDmcAvg = []; CDmcMin=[]
         for i in range(len(TestVec)):
             ST1 = arST[IdxST[0]][i]; ST2=arST[IdxST[1]][i]; ST3=arST[IdxST[2]][i]; ST4=arST[IdxST[3]][i]
-            ST5=arST[IdxST[4]][i]
+            
                
                 
             LT1 = arLT[IdxLT[0]][i]; LT2=arLT[IdxLT[1]][i]; LT3=arLT[IdxLT[2]][i]; LT4=arLT[IdxLT[3]][i]
-            STr = ST1+ST2; LTr =  (LT2+LT1)/1
+            STr = ST1+ST2; LTr =  LT2+LT1
             res = STr - LTr 
             CDmcAvg.append(res)
                 
@@ -450,24 +453,27 @@ def MSARk(Data):
 
             CDmcAvg.append(res)
 
-        ICD3 = np.reshape(CDmcAvg, (N,N))
+        
         
         
     
     #------------------------- Anomaly Detection ------------------------#
 
-    ICD3 = np.reshape(CDmcAvg, (N,N))
-    resARAvg3=moving_average(ICD3, K)
-    resARAvgVecC3= resARAvg3.ravel()
+    OutSup = np.reshape(CDmcAvg, (N,N))
+    sf=moving_average(OutSup, K)
+    OutSupVec= OutSup.ravel()
+    
+    OutAvgVec = sf.ravel()
+    
       
    
     
     ## IQR / Boxplot
     percentiles= np.array([75])
-    x_p = np.percentile(resARAvgVecC3, percentiles)
+    x_p = np.percentile(OutAvgVec, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(resARAvgVecC3, [25, 90]) #25, 75
+    quartile_1, quartile_3 = np.percentile(OutAvgVec, [30, 90]) #25, 75
     
     iqr = quartile_3 - quartile_1
     
@@ -475,13 +481,13 @@ def MSARk(Data):
     upper_bound = quartile_3 + (iqr * 1.5)
       
     arraylist = []; Res = []; cnt=0; ths = 1
-    for i in range(len(resARAvgVecC3)):
-        if (resARAvgVecC3[i] >= lower_bound and resARAvgVecC3[i] <= upper_bound):
+    for i in range(len(OutAvgVec)):
+        if (OutAvgVec[i] >= lower_bound and OutAvgVec[i] <= upper_bound):
             res = 0
             Res.append(res)
        
         else:
-            res=resARAvgVecC3[i] 
+            res=OutAvgVec[i] 
             Res.append(res)
             
         arraylist.append(Res)

@@ -198,7 +198,7 @@ def MSARkSample(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes       
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
@@ -296,7 +296,7 @@ def MSARkSample(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
@@ -394,7 +394,7 @@ def MSARkSample(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
         
         # MinMax for LRW Composition and clutter suppression under changes
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
@@ -434,7 +434,7 @@ def MSARkSample(Data):
         pLT = [p1,p2,p3,p4, p5, p6]                      
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6]
         
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:2]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:2]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:2]  # sorting
         criteria = ['avg', 'min']
         criteria = criteria[0]
@@ -508,7 +508,7 @@ def MSARkSample(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6]
         
         # MinMax for LRW Composition and clutter suppression under changes       
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
@@ -577,7 +577,7 @@ def MSARkSample(Data):
         arLT = [ar1, ar2, ar3, ar4, ar5, ar6]
         
         # MinMax for LRW Composition and clutter suppression under changes
-        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+        IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
         IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
        
         TestVec =Itest.ravel()
@@ -611,7 +611,7 @@ def MSARkSample(Data):
     x_p = np.percentile(OutSupVec, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(OutSupVec, [25, 75]) #25, 75
+    quartile_1, quartile_3 = np.percentile(OutSupVec, [30, 90]) #25, 75
     
     iqr = quartile_3 - quartile_1
     
@@ -624,7 +624,7 @@ def MSARkSample(Data):
     x_p = np.percentile(OutAvgVec, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(OutAvgVec, [25, 75]) #25, 75
+    quartile_1, quartile_3 = np.percentile(OutAvgVec, [30, 90]) #25, 75
     
     iqr = quartile_3 - quartile_1
     

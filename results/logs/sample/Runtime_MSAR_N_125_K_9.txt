@@ -4,3 +4,4 @@ MSAR;N_125;K_9;pair_2;runtime_per_regime_0.04545792666348544;runtime_total_0.500
 MSAR;N_125;K_9;pair_1;runtime_per_regime_0.05920663746920499;runtime_total_0.6512730121612549
 MSAR;N_125;K_9;pair_2;runtime_per_regime_0.06084565682844682;runtime_total_0.669302225112915
 MSAR;N_125;K_9;pair_2;runtime_per_regime_0.06968530741604892;runtime_total_0.7665383815765381
+MSAR;N_125;K_9;pair_2;runtime_per_regime_0.06338535655628551;runtime_total_0.6972389221191406
