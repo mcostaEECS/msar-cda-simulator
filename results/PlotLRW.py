@@ -268,7 +268,7 @@ if __name__ == "__main__":
 
 
     path='results/plots/'
-    namefile = 'resRW_%s_N_%d.png'%(test_type,block)
+    namefile = 'LRW_%s_N_%d.png'%(test_type,block)
 
    
     
