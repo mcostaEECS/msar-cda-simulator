@@ -98,7 +98,7 @@ if __name__ == "__main__":
     
     
     test_type = ['MSAR',  'MSARk', 'MSARkh']
-    test_type  = test_type[0]
+    test_type  = test_type[1]
     
 
     
@@ -109,10 +109,11 @@ if __name__ == "__main__":
     campaign = 'Campaign_%s_N_%d_K_%d'%(test_type, N, K)
     pathOut = 'results/ROC/'
     id = pathOut+campaign+'.mat'
-
-    pfa_min = 0.5; pfa_max = 2.6
     
-    #pfa_min = 0.5; pfa_max = 3.6
+    if test_type == 'MSAR':
+        pfa_min = 0.5; pfa_max = 2.6
+    else:
+        pfa_min = 0.5; pfa_max = 3.6
     
     
     
