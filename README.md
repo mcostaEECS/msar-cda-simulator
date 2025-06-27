@@ -9,43 +9,27 @@ The simulator supports different MS-AR model variants, including:
 - `MSAR`  →  (k = 11, ℓ = 1, h = 0)  
 - `MSARk` →  (k = 23, ℓ = 2, h = 0)  
 - `MSARkh` →  (k = 23, ℓ = 2, h = 1)
-<<<<<<< HEAD
 
----
-
-## 📁 Repository Structure
-=======
->>>>>>> 18816c1 (README update)
-
----
 
 ## 📁 Repository Structure
 
 ```
 msar-cda-simulator/
 ├── main_simulation/        # Main simulation engine over full dataset
-│   └── run_main_simulation.py
+│   └── main.py
 ├── analysis/               # ROC curve generation and performance plots
-│   └── classifier_analysis.py
+│   └── mainROC.py
 ├── tools/                  # Analytical simulators (e.g., anomaly, recursion)
-│   └── ...
+│   └── ...functions
 ├── data/                   # Sample data or loader scripts
 ├── results/                # Output figures and result .mat files
 ├── requirements.txt        # Python dependencies
 ├── LICENSE                 # MIT License
 └── README.md               # Project overview and instructions
-<<<<<<< HEAD
+
 
 ## 🚀 How to Run
 
-=======
-```
-
----
-
-## 🚀 How to Run
-
->>>>>>> 18816c1 (README update)
 ### 1. Install Dependencies
 
 ```bash
@@ -55,22 +39,16 @@ pip install -r requirements.txt
 ### 2. Run Main Simulation
 
 ```bash
-<<<<<<< HEAD
 python main_simulation/main.py
-=======
-python main_simulation/run_main_simulation.py
->>>>>>> 18816c1 (README update)
-```
 
 ### 3. Run Classifier and ROC Analysis
 
 ```bash
-python analysis/classifier_analysis.py
+python analysis/mainROC.py
 ```
 
 Output files are saved in the `results/` directory.
 
----
 
 ## 📊 Dataset
 
@@ -81,7 +59,6 @@ This simulator was developed for experiments using the **CARABAS-II UWB-SAR data
 > ⚠️ **Note**: The dataset is not included in this repository due to licensing restrictions.  
 > See `data/README.md` for instructions on how to prepare compatible `.mat` files and load target positions.
 
----
 
 ## 📦 Requirements
 
@@ -98,13 +75,10 @@ Install all via:
 pip install -r requirements.txt
 ```
 
----
-
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
 
----
 
 ## 📌 Citation
 
@@ -121,8 +95,6 @@ The code used to generate the results in this paper **will be made publicly avai
   howpublished = {\url{https://github.com/mcostaEECS/msar-cda-simulator}}
 }
 ```
-
----
 
 ## 🤝 Contributing
 
