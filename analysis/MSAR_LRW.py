@@ -157,38 +157,98 @@ def test2(Itest, Iref, TAG):
     return CD0
 
 
-def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
+def dataInput(test_type, N):
     
-    #ItestCT = par[25][start1:end1,start2:end2]  
-    ItestCT = MCnAR1D(start1,start2, end1, end2, N,K,z, tag)
+    
+    TestType = ['MSAR']
+    if test_type=='CTi' or test_type=='CTh':
+        
+        par=load_sample(TestType[0])[2]
+        s=2
+        
+    elif test_type=='CT' or test_type=='CC':
         
 
-    IrefA = par[0][start1:end1,start2:end2]
-    IrefB = par[1][start1:end1,start2:end2]
-    IrefC = par[2][start1:end1,start2:end2]
-    IrefD = par[3][start1:end1,start2:end2]
-    IrefE = par[4][start1:end1,start2:end2]
-    IrefF = par[5][start1:end1,start2:end2]
+        
+        par=load_sample(TestType[0])[1]
+        s=1
+        
+        
+        
+    tp=par[23]; tp =  np.fliplr(tp); TP =par[24]
     
-    IrefG = par[6][start1:end1,start2:end2]
-    IrefH = par[7][start1:end1,start2:end2]
-    IrefI = par[8][start1:end1,start2:end2]
-    IrefJ = par[9][start1:end1,start2:end2]
-    IrefK = par[10][start1:end1,start2:end2]
-    IrefL = par[11][start1:end1,start2:end2]
+    start1=0; end1 = 500; start2=0; end2 = 500
     
-    IrefM = par[12][start1:end1,start2:end2]
-    IrefN = par[13][start1:end1,start2:end2]
-    IrefO = par[14][start1:end1,start2:end2]
-    IrefP = par[15][start1:end1,start2:end2]
-    IrefQ = par[16][start1:end1,start2:end2]
-    IrefR = par[17][start1:end1,start2:end2]
+    Itest = par[25][start1:end1,start2:end2]
     
-    IrefS = par[18][start1:end1,start2:end2]
-    IrefT = par[19][start1:end1,start2:end2]
-    IrefU = par[20][start1:end1,start2:end2]
-    IrefV = par[21][start1:end1,start2:end2]
-    IrefX = par[22][start1:end1,start2:end2]
+    ItestSub = subarrays(Itest, N, N)
+   
+    IrefA = subarrays(par[0][start1:end1,start2:end2],N,N)
+    IrefB = subarrays(par[1][start1:end1,start2:end2],N,N)
+    IrefC = subarrays(par[2][start1:end1,start2:end2],N,N)
+    IrefD = subarrays(par[3][start1:end1,start2:end2],N,N)
+    IrefE = subarrays(par[4][start1:end1,start2:end2],N,N)
+    IrefF = subarrays(par[5][start1:end1,start2:end2],N,N)
+    IrefG = subarrays(par[6][start1:end1,start2:end2],N,N)
+    IrefH = subarrays(par[7][start1:end1,start2:end2],N,N)
+    IrefI = subarrays(par[8][start1:end1,start2:end2],N,N)
+    IrefJ = subarrays(par[9][start1:end1,start2:end2],N,N)
+    IrefK = subarrays(par[10][start1:end1,start2:end2],N,N)
+    IrefL = subarrays(par[11][start1:end1,start2:end2],N,N)
+    IrefM = subarrays(par[12][start1:end1,start2:end2],N,N)
+    IrefN = subarrays(par[13][start1:end1,start2:end2],N,N)
+    IrefO = subarrays(par[14][start1:end1,start2:end2],N,N)
+    IrefP = subarrays(par[15][start1:end1,start2:end2],N,N)
+    IrefQ = subarrays(par[16][start1:end1,start2:end2],N,N)
+    IrefR = subarrays(par[17][start1:end1,start2:end2],N,N)
+    
+    IrefS = subarrays(par[18][start1:end1,start2:end2],N,N)
+    IrefT = subarrays(par[19][start1:end1,start2:end2],N,N)
+    IrefU = subarrays(par[20][start1:end1,start2:end2],N,N)
+    IrefV = subarrays(par[21][start1:end1,start2:end2],N,N)
+    IrefX = subarrays(par[22][start1:end1,start2:end2],N,N)
+    
+   
+    p = 2 # C-C
+    
+    DataCC = [ItestSub[p], IrefA[p], IrefB[p], IrefC[p], IrefD[p], IrefE[p], IrefF[p], IrefG[p],
+                    IrefH[p],IrefI[p], IrefJ[p], IrefK[p], IrefL[p], IrefM[p], IrefN[p], IrefO[p], 
+                    IrefP[p], IrefQ[p],IrefR[p], IrefS[p], IrefT[p], IrefU[p], IrefV[p], IrefX[p], 
+                    TP, N, K,s, test_type]
+                
+    
+    p = 10 # C-T
+    
+    DataCT = [ItestSub[p], IrefA[p], IrefB[p], IrefC[p], IrefD[p], IrefE[p], IrefF[p], IrefG[p],
+                    IrefH[p],IrefI[p], IrefJ[p], IrefK[p], IrefL[p], IrefM[p], IrefN[p], IrefO[p], 
+                    IrefP[p], IrefQ[p],IrefR[p], IrefS[p], IrefT[p], IrefU[p], IrefV[p], IrefX[p], 
+                    TP, N, K,s, test_type]
+    
+    return DataCT, DataCC
+    
+    
+
+
+def MCnAR1LT2(Data):
+    
+    
+        # [Diversity/Test Training MS-AR(D,\ell,h)]
+    Itest = Data[0]
+    
+    IrefA = Data[1]; IrefB = Data[2]; IrefC = Data[3]; IrefD = Data[4]; IrefE = Data[5]; IrefF = Data[6]
+    IrefG = Data[7]; IrefH = Data[8]; IrefI = Data[9]; IrefJ = Data[10]; IrefK = Data[11]; IrefL = Data[12]
+    IrefM = Data[13]; IrefN = Data[14]; IrefO = Data[15]; IrefP = Data[16]; IrefQ = Data[17]; IrefR = Data[18]
+    IrefS = Data[19]; IrefT = Data[20]; IrefU = Data[21]; IrefV = Data[22]; IrefX = Data[23] 
+    
+    ItestD = [IrefS, IrefT, IrefU, IrefV, IrefX]
+
+    tp = Data[24]; N = Data[25]; K = Data[26]; s = Data[27]
+    test_type = Data[28]
+    
+    #ItestCT = par[25][start1:end1,start2:end2]  
+    ItestCT = MCnAR1D(Itest, ItestD, N,test_type )
+        
+
     
     arLags = [IrefA, IrefB, IrefC, IrefD, IrefE, IrefF, IrefG, IrefH, IrefI, IrefJ, IrefK, 
               IrefL,IrefM, IrefN, IrefO, IrefP, IrefQ, IrefR]
@@ -197,6 +257,22 @@ def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
     
     rw = randomwalk1D(ItestCT,arLags)
     
+    # IdxLT = sorted(range(len(rw[1][1:])), key=lambda sub: rw[1][1:][sub], reverse=False)[:4]
+    
+
+    
+    # arLTmin1 = test(ItestCT, arLags[IdxLT[0]+1])
+    # arLTmin2 = test(ItestCT, arLags[IdxLT[1]+1])
+    # arLTmin3 = test(ItestCT, arLags[IdxLT[2]+1])
+    
+    
+    ar19 = test(ItestCT, IrefS);ar20 = test(ItestCT, IrefT);ar21 = test(ItestCT, IrefU)
+    ar22 = test(ItestCT, IrefV);ar23 = test(ItestCT, IrefX) 
+    
+    
+    # p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin1).flatten())[0][1])
+    # p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin2).flatten())[0][1])
+    # p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin3).flatten())[0][1])
     
     
     ar1 = test(ItestCT, IrefA);ar2 = test(ItestCT, IrefB);ar3 = test(ItestCT, IrefC)
@@ -208,8 +284,7 @@ def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
     ar13 = test(ItestCT, IrefM);ar14 = test(ItestCT, IrefN);ar15 = test(ItestCT, IrefO)
     ar16 = test(ItestCT, IrefP);ar17 = test(ItestCT, IrefQ);ar18 = test(ItestCT, IrefR) 
     
-    ar19 = test(ItestCT, IrefS);ar20 = test(ItestCT, IrefT);ar21 = test(ItestCT, IrefU)
-    ar22 = test(ItestCT, IrefV);ar23 = test(ItestCT, IrefX) 
+
     
     
     p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar1).flatten())[0][1])
@@ -233,24 +308,32 @@ def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
     p17 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar17).flatten())[0][1])
     p18 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar18).flatten())[0][1])
     
-    
-    p19 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar19).flatten())[0][1])
-    p20 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar20).flatten())[0][1])
-    p21 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar21).flatten())[0][1])
-    p22 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar22).flatten())[0][1])
-    p23 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar23).flatten())[0][1])
-    
-    
-    pST =  [ p19,  p20, p21, p22, p23]                      
-    arST = [ ar19, ar20, ar21, ar22, ar23] 
+
     
     
     pLT = [p1,p2,p3,p4, p5, p6, p7, p8, p9,p10,p11,p12, p13, p14, p15, p16, p17, p18]                      
     arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
       
+  
+    
+    
+    p19 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar19).flatten())[0][1])
+    p20 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar20).flatten())[0][1])
+    p21 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar21).flatten())[0][1])
+    p22 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar22).flatten())[0][1])
+    p23 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar23).flatten())[0][1])
+    
+    
+    pST =  [ p19,  p20, p21, p22, p23]                      
+    arST = [ ar19, ar20, ar21, ar22, ar23] 
+    
+    
+
+      
    
-    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
-    IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=True)[:4]  # sorting
+    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
+    
+    IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
     criteria = ['avg', 'min']
     criteria = criteria[0]
     
@@ -259,15 +342,17 @@ def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
     
     CDmcAvg = []; CDmcMin=[]
     for i in range(len(TestVec)):
-        if z == 0:
+        if test_type == 'CTh':
             ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])/2
+            #LT1 = (arLTmin1[0] + arLTmin2[0])/2
             LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
             
             res = ST1 - LT1 # change map from clutter reduction
             
-        elif z == 1:
-            ST1 = (arST[IdxST[1]][i] + arST[IdxST[2]][i])/2
-            LT1 = (arLT[IdxLT[1]][i] + arLT[IdxLT[2]][i])/2
+        else:
+            ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])/2
+            #LT1 = (arLTmin1[0] + arLTmin2[0])/2
+            LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
             
             res = ST1 - LT1 # change map from clutter reduction
 
@@ -279,133 +364,16 @@ def MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag):
     return ICD3, rw[0], rw[1], ItestCT
 
 
-def MCnAR1ST1(start1,start2, end1, end2, N,K, z, tag):
-    
-    #ItestCT = par[25][start1:end1,start2:end2]  
-    
-    ItestCT = MCnAR1D(start1,start2, end1, end2, N,K, z, tag)
-        
 
-    IrefA = par[0][start1:end1,start2:end2]
-    IrefB = par[1][start1:end1,start2:end2]
-    IrefC = par[2][start1:end1,start2:end2]
-    IrefD = par[3][start1:end1,start2:end2]
-    IrefE = par[4][start1:end1,start2:end2]
-    IrefF = par[5][start1:end1,start2:end2]
+def MCnAR1D(ItestCT, ItestD, N,test_type):
     
-    IrefS = par[18][start1:end1,start2:end2]
-    IrefT = par[19][start1:end1,start2:end2]
-    IrefU = par[20][start1:end1,start2:end2]
-    IrefV = par[21][start1:end1,start2:end2]
-    IrefX = par[22][start1:end1,start2:end2]
-    
-    arLags = [IrefA, IrefB, IrefC, IrefD, IrefE, IrefF]
-    
-    
-    
-    rw = randomwalk1D(ItestCT,arLags)
-    
-    
-    
-    ar19 = test(ItestCT, IrefS);ar20 = test(ItestCT, IrefT);ar21 = test(ItestCT, IrefU)
-    ar22 = test(ItestCT, IrefV);ar23 = test(ItestCT, IrefX) 
-    
-    p19 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar19).flatten())[0][1])
-    p20 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar20).flatten())[0][1])
-    p21 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar21).flatten())[0][1])
-    p22 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar22).flatten())[0][1])
-    p23 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar23).flatten())[0][1])
-    
-    
-    pST =  [ p19,  p20, p21, p22, p23]                      
-    arST = [ ar19, ar20, ar21, ar22, ar23] 
-    
-    
-    
-    
-   
-    
-    ar1 = test(ItestCT, IrefA);ar2 = test(ItestCT, IrefB);ar3 = test(ItestCT, IrefC)
-    ar4 = test(ItestCT, IrefD);ar5 = test(ItestCT, IrefE);ar6 = test(ItestCT, IrefF)
-     
-    
-    
-    p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar1).flatten())[0][1])
-    p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar2).flatten())[0][1])
-    p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar3).flatten())[0][1])
-    p4 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar4).flatten())[0][1])
-    p5 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar5).flatten())[0][1])
-    p6 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar6).flatten())[0][1])
-    
+    IrefS = ItestD[0]; IrefT = ItestD[1]
+    IrefU = ItestD[2]; IrefV = ItestD[3]
+    IrefX = ItestD[4]
 
-    
-    
-    
-    
-    
-    pLT = [p1,p2,p3,p4, p5, p6]        
-    print(pLT)              
-    arLT = [ar1, ar2, ar3, ar4, ar5, ar6]
-      
-    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
-    IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=True)[:4]  # sorting
-    print(IdxLT)
-    criteria = ['avg', 'min']
-    criteria = criteria[0]
-    
-    TestVec =ItestCT.ravel()
-    
-    
-    CDmcAvg = []; CDmcMin=[]
-    for i in range(len(TestVec)):
-        if z == 0:
-            LT1 = (arLT[IdxLT[0]][i])
-            ST1 = (arST[IdxST[0]][i])
-            
-            res = ST1- LT1   # change map from clutter reduction
-            
-        elif z == 1:
-            LT1 = (arLT[IdxLT[2]][i])
-            ST1 = (arST[IdxST[2]][i])
-            
-            res = ST1 - LT1
-
-        CDmcAvg.append(res)
-
-    ICD3 = np.reshape(CDmcAvg, (N,N))
-    resARAvg3=moving_average(ICD3, K)
-    
-    
-    return ICD3, rw[0], rw[1], ItestCT
-    
-    
-
-
-
-
-def MCnAR1D(start1,start2, end1, end2, N,K, z, tag):
-    
-    ItestCT = par[25][start1:end1,start2:end2]  #36 / 18 limite de memoria
-  
-    IrefS = par[18][start1:end1,start2:end2]
-    IrefT = par[19][start1:end1,start2:end2]
-    IrefU = par[20][start1:end1,start2:end2]
-    IrefV = par[21][start1:end1,start2:end2]
-    IrefX = par[22][start1:end1,start2:end2]
-    
     Irefs = [IrefS.ravel(), IrefT.ravel(), IrefU.ravel(), IrefV.ravel(), IrefX.ravel()]
 
     
-    # fig = plt.figure('test')
-    # #plt.suptitle('REF / TEST / Change')
-    
-    # ax = fig.add_subplot(1, 1, 1)
-    # plt.imshow(ItestCT, cmap = plt.cm.gray)
-    # plt.axis("off")
-    # plt.show() 
-    # print(g)
-    
-    
    
     
     ar19 = test(ItestCT, IrefS);ar20 = test(ItestCT, IrefT);ar21 = test(ItestCT, IrefU)
@@ -425,7 +393,7 @@ def MCnAR1D(start1,start2, end1, end2, N,K, z, tag):
     
      
    
-    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=False)[:4]  # sorting
+    IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
     
   
     criteria = ['avg', 'min']
@@ -436,19 +404,13 @@ def MCnAR1D(start1,start2, end1, end2, N,K, z, tag):
     
     CDmcAvg = []; CDmcMin=[]
     for i in range(len(TestVec)):
-        if z == 0:
+        if test_type == 'CTh':
+            ST1 = Irefs[IdxST[1]][i]; ST2 = Irefs[IdxST[2]][i]
+            res = (TestVec[i] + ST1 +  ST2)/3   # change map from clutter reduction
             
-            if tag == 1:
-                ST1 = Irefs[IdxST[1]][i]; ST2 = Irefs[IdxST[2]][i]
-                res = (TestVec[i] + ST1 + ST2)/3   # change map from clutter reduction
-            else:
-                ST1 = Irefs[IdxST[0]][i]
-                
-                res = (TestVec[i] + ST1)/2   # change map from clutter reduction
-                
-        elif z == 1:
-            ST1 = Irefs[IdxST[1]][i]; ST2 = Irefs[IdxST[3]][i]
-            res = (TestVec[i] + ST1 + ST2)/3 #ST1  # change map
+        else:
+            ST1 = Irefs[IdxST[0]][i]; ST2 = Irefs[IdxST[1]][i]
+            res = (TestVec[i] + ST1+ ST2)/3 #ST1  # change map
 
         CDmcAvg.append(res)
 
@@ -463,27 +425,19 @@ if __name__ == "__main__":
 
        
     test_type = ['CT', 'CC', 'CTi', 'CTh']
-    #test_type = ['CT']
-    rep = 1; K = 9; step = 25; d = 10; N =100
+    #test_type = ['CTh']
+    rep = 1; K = 9; step = 25; d = 10
    
     
-    path = '/home/marcello-costa/workspace/kthSim/Output/RW/'
-
-    block = [100, 500]
+    block = [100, 125]
     #test_type = ['S1', 'K1', 'F1', 'AF1']
-    block= block[1]
-    TestType = ['ARn3opt']
-    
+    N= block[1]
     
 
-
-    
-    # print(g)
-    #idx =0
          
             
-    pathOut = '/home/marcello-costa/workspace/kthSim/Output/RW/logs/'
-    campaign = 'Campaign_rep_%d_lags_%d_div_%d'%(rep, step, d)
+    pathOut = 'results/logs/'
+    campaign = 'LRW_rep_%d_lags_%d_div_%d'%(rep, step, d)
     
     REP = []
     Hatt = []; Rwkt=[]; Rwmt=[]; Itestt=[]; Icdt=[]; Tht=[]
@@ -501,14 +455,9 @@ if __name__ == "__main__":
             print('rep_%d_lags_%d_div_%d_test_%s'%(r,step,d,test_type[i]))
             if test_type[i] == 'CT':
                 
-                z = 0
-                tag = 1
                 
-                s= 14
-                par=load_data(TestType[0])[s]
                 
-                start1=2150; end1 = 2250; start2=1300; end2 = 1400  # F1  (100 C-T)
-                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag)
+                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(dataInput(test_type[i],N)[0])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
@@ -533,14 +482,8 @@ if __name__ == "__main__":
                 
             elif test_type[i] == 'CC':
                 
-                z = 0
-                tag = 1
                 
-                s= 14
-                par=load_data(TestType[0])[s]
-                
-                start1=2150; end1 = 2250; start2=1500; end2 = 1600  # F1  (100 C-C)
-                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag)
+                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(dataInput(test_type[i],N)[1])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
@@ -565,14 +508,8 @@ if __name__ == "__main__":
                 
         
             elif test_type[i] == 'CTi':
-                z = 0
-                tag = 0
                 
-                s= 15
-                par=load_data(TestType[0])[s]
-                
-                start1=2150; end1 = 2250; start2=1300; end2 = 1400  # F1  (100 C-T)
-                [resAvg,rw1,rw2, Test] = MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag)
+                [resAvg,rw1,rw2, Test] = MCnAR1LT2(dataInput(test_type[i],N)[0])
                 
                 
                 
@@ -599,14 +536,8 @@ if __name__ == "__main__":
                 
             elif test_type[i] == 'CTh':
                 
-                z = 1
-                tag = 0
                 
-                s= 15
-                par=load_data(TestType[0])[s]
-                
-                start1=2150; end1 = 2250; start2=1300; end2 = 1400  # F1  (100 C-T)
-                [resAvg,rw1,rw2, Test] = MCnAR1LT2(start1,start2, end1, end2, N,K,z, tag)
+                [resAvg,rw1,rw2, Test] = MCnAR1LT2(dataInput(test_type[i], N)[0])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
@@ -643,6 +574,16 @@ if __name__ == "__main__":
         
         REP.append(r)
         
+       
+        fig = plt.figure('test')
+        plt.suptitle('REF / TEST / Change')
+        
+        ax = fig.add_subplot(1, 1, 1)
+        plt.imshow(ICD3, cmap = plt.cm.gray)
+        plt.axis("off")
+        plt.show()
+                
+        
               
     
     
@@ -678,7 +619,7 @@ if __name__ == "__main__":
     
     
     id = pathOut+campaign+'.mat'        
-    scipy.io.savemat(id,results) 
+    sio.savemat(id,results) 
                 
     
     
