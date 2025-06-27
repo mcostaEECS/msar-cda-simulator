@@ -1,242 +1,107 @@
-from __future__ import division
+import matplotlib.pyplot as plt
 import numpy as np
-import time
-from matplotlib import pyplot as plt
-import array
-import scipy.io
-import scipy.io as io
-from sklearn.metrics import roc_curve, roc_auc_score
-
 import os
-import pyprind
-import re
-import scipy.io as sio
-import datetime
-import numpy as np
-import time
-from matplotlib import pyplot as plt
-import array
-import scipy.io
-import scipy.io as io
-import pyprind
 import math
+from scipy.io import loadmat
 from ast import literal_eval
 import scienceplots
-
 
 def OrderData(theta, tput_meas):
     Theta = sorted(set(theta))
     TPUT_meas = []
     for k in range(len(Theta)):
         indexes=[i for i, x in enumerate(theta) if x == Theta[k]]
-        Tput_meas= 0
-        for i in indexes:
-            Tput_meas += tput_meas[i]
+        Tput_meas = sum(tput_meas[i] for i in indexes)
         TPUT_meas.append(Tput_meas)
     return Theta, TPUT_meas
-
-
 
 if __name__ == "__main__":
 
     path = 'results/ROC/'
     pathOut = 'results/plots/'
     files_plots = [i for i in os.listdir(path) if i.endswith('.mat')]
-    
+
     PD = []
     PFA = []
-    window = []
     Type = []
-    pd=[];pfa=[]
+    AUCs = []
+    labels_latex = []
 
-    for i in range(len(files_plots)):
-        if files_plots[i].find('MSAR_') != -1:
-                #print(files_plots[i])
-                Test = r'MS-AR($6,1,0$)'
-                N = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[0])
-                K = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[1])
-                r = scipy.io.loadmat(path+files_plots[i])
-       
-                pfa_range=r['pfa_range.mat'][0].tolist()
-                PD_type=r['PD_type.mat'].tolist()[0]
-                FAR_type=r['FAR_type.mat'].tolist()[0]
-                
-                PD_type= literal_eval(PD_type)
-                
-                
-                FAR_type= literal_eval(FAR_type)  
-                
-                
-        elif files_plots[i].find('MSARkh_') != -1:
-                #print(files_plots[i])
-                Test = r'MS-AR($18,2,1$)'
-                N = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[0])
-                K = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[1])
-               
-                r = scipy.io.loadmat(path+files_plots[i])
-       
-                pfa_range=r['pfa_range.mat'][0].tolist()
-                PD_type=r['PD_type.mat'].tolist()[0]
-                FAR_type=r['FAR_type.mat'].tolist()[0]
-                
-                PD_type= literal_eval(PD_type)
-                
-                
-                FAR_type= literal_eval(FAR_type)
-                
-           
-        
-        elif files_plots[i].find('GPalm2020') != -1:
-                   Test = r'AR(n)-GSP\textsuperscript{[15]}'
-                   N = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[0])
-                   K = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[1])
-                   
+    for fname in files_plots:
+        file_path = os.path.join(path, fname)
+        r = loadmat(file_path)
+        pfa_range = r['pfa_range.mat'][0].tolist()
+        PD_type = literal_eval(r['PD_type.mat'].tolist()[0])
+        FAR_type = literal_eval(r['FAR_type.mat'].tolist()[0])
 
-                   r = scipy.io.loadmat(path+files_plots[i])
-                   pfa_range=r['pfa_range.mat'][0].tolist()
-                   PD_type=r['PD_type.mat'].tolist()[0]
-                   FAR_type=r['FAR_type.mat'].tolist()[0]
+        if 'MSAR_' in fname:
+            label = r'MS-AR($6,1,0$)'
+        elif 'MSARk_' in fname:
+            label = r'MS-AR($18,2,0$)'
+        elif 'MSARkh_' in fname:
+            label = r'MS-AR($18,2,1$)'
+        elif 'GPalm2020' in fname:
+            label = r'AR($n$)-GSP\textsuperscript{[15]}'
+        elif 'CNN-GSP' in fname:
+            label = r'CNN-GSP\textsuperscript{[17]}'
+        else:
+            label = 'Unknown'
 
-                   PD_type= literal_eval(PD_type)
-                   FAR_type= literal_eval(FAR_type)      
-                
-                
-        elif files_plots[i].find('MSARk_') != -1:
-                #print(files_plots[i])
-                Test = r'MS-AR($18,2,0$)'
-                N = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[0])
-                K = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[1])
-                
-                
-                
+        Type.append(label)
+        PD.append(PD_type)
+        PFA.append([max(f, 1e-4) for f in FAR_type])  # Avoid log(0)
 
-                r = scipy.io.loadmat(path+files_plots[i])
-       
-                pfa_range=r['pfa_range.mat'][0].tolist()
-                PD_type=r['PD_type.mat'].tolist()[0]
-                FAR_type=r['FAR_type.mat'].tolist()[0]
-                
-                PD_type= literal_eval(PD_type)
-                
-                
-                FAR_type= literal_eval(FAR_type)  
-       
- 
-        elif files_plots[i].find('CNN-GSP') != -1:
-                   Test = r'CNN-GSP\textsuperscript{[17]}'
-                   N = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[0])
-                   K = int(re.findall(r'[-+]?(?:\d*\.\d+|\d+)', files_plots[i][:-4])[1])
-                   
-
-                   r = scipy.io.loadmat(path+files_plots[i])
-                   pfa_range=r['pfa_range.mat'][0].tolist()
-                   PD_type=r['PD_type.mat'].tolist()[0]
-                   FAR_type=r['FAR_type.mat'].tolist()[0]
-
-                   PD_type= literal_eval(PD_type)
-                   FAR_type= literal_eval(FAR_type) 
-     
-                
-
-                   
-                   
-        PD.append(PD_type); PFA.append(FAR_type); window.append(N); Type.append(Test) 
-        
-
+    # --- Plot Setup --- #
     plt.rc('text', usetex=True)
-    DPI = 600
+    plt.style.use(['science', 'ieee', 'std-colors'])
 
+    fig, ax = plt.subplots(figsize=(6.5, 4.5), dpi=600)
 
-    SMALL_SIZE = 10
-    MEDIUM_SIZE = 16
-    BIGGER_SIZE = 12
+    color_list = ['royalblue', 'darkred', 'mediumseagreen', 'darkorange', 'gray']
+    marker_list = ['o', 's', '^', 'D', '*']
+    linestyle_list = ['-', '--', '-.', ':', '-']
 
-    plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    
- 
-    pparam2 = dict(xlabel=r'FLOP/sec', ylabel=r'Battery Discharge ($\%$)')
+    for i in range(len(PD)):
+        pd_curve = np.array(PD[i])
+        pfa_curve = np.clip(np.array(PFA[i]), 1e-4, 1)  # Ensure finite values
 
-    
+        # Sort and normalize
+        idx = np.argsort(pfa_curve)
+        pd_sorted = pd_curve[idx]
+        far_sorted = pfa_curve[idx]
+        far_norm = (far_sorted - far_sorted[0]) / (far_sorted[-1] - far_sorted[0])
+        auc_score = np.trapz(pd_sorted, far_norm)
 
-    with plt.style.context(['science', 'ieee', 'std-colors']):
-            
-            #order = [3, 0, 4, 2, 1] 
-            fig, ax2 = plt.subplots(figsize=(5,3), dpi=DPI)
-            ax2.set_prop_cycle(color=['darkred', 'indianred', 'royalblue', 'cornflowerblue', 'gray'],marker = ['o','*', 'p', 's','<'], linestyle=['dashdot','solid', 'solid', 'solid', 'solid'],alpha=[0.8, 0.4, 0.8, 0.3, 0.3]) #linewidth=2
-            ax2.set_prop_cycle(color=['royalblue', 'indianred', 'darkblue','darkred', 'darkviolet',  'indianred'],marker = ['o','*', 'p', 's','<', 'o'])#linewidth=2
-            for i in range(len(PD)):
-                
-                PFA[i] = list(map(lambda i: 0.0001 if i==0 else i, PFA[i]))
-                PFA[i] = np.clip(PFA[i],0,1)#[min(x, 0.00001) for x in PFA[i]]
-                
-                
-                far = np.array(PFA[i])
-                pd  = np.array(PD[i])
-                print(Type[i])
-                print(far)
-                print(pd)
+        AUCs.append(auc_score)
+        labels_latex.append(r'%s (AUC=%.3f)' % (Type[i], auc_score))
 
-                # Sort and normalize
-                idx = np.argsort(far)
-                far_sorted = far[idx]
-                pd_sorted = pd[idx]
-                far_norm = (far_sorted - far_sorted[0]) / (far_sorted[-1] - far_sorted[0])
+        log_far = np.log10(far_sorted)
+        ax.plot(log_far, pd_sorted,
+                label=labels_latex[-1],
+                color=color_list[i % len(color_list)],
+                linestyle=linestyle_list[i % len(linestyle_list)],
+                marker=marker_list[i % len(marker_list)],
+                linewidth=2, markersize=5, alpha=0.9)
 
-                # Compute AUC
-                auc_norm = np.trapz(pd_sorted, far_norm)
-                print(f"Normalized AUC (MS-AR(18,2,1)) = {auc_norm:.4f}")
-        
-                PFA[i] = [math.log(y,10) for y in PFA[i]]
-                
-                
-                
-                
-                [FARx, PDy] = OrderData(PD[i], PFA[i])
-                end  = np.argmax(PDy)
-                 
+    # --- Axis Labels and Grid --- #
+    ax.set_xlabel(r'$\log_{10}$ FAR', fontsize=16)
+    ax.set_ylabel(r'$P_D$', fontsize=16)
+    ax.set_xlim([-1.65, 0])
+    ax.set_ylim([0.94, 1.005])
+    ax.grid(True, which='both', linestyle='-', linewidth=0.4, alpha=0.4)
+    ax.minorticks_on()
+    ax.yaxis.set_tick_params(labelleft=False, labelright=True)
 
-                ax2.plot(PFA[i], PD[i], linewidth=2, label=r'%s(AUC=%.4f)'%(Type[i],auc_norm)) # test append(s)
-                
-                
+    # --- Legend Sorted by AUC --- #
+    handles, labels = ax.get_legend_handles_labels()
+    auc_sorted = sorted(zip(AUCs, handles, labels), reverse=True)
+    auc_handles = [x[1] for x in auc_sorted]
+    auc_labels = [x[2] for x in auc_sorted]
 
-            ax2.legend(title='Order')
-            ax2.set(**pparam2)
-            ax2.legend(prop={'size':12})
-            ax2.set_ylabel(r'$P_{D}$', fontsize=14)  
-            ax2.set_xlabel(r'$\log_{10}$ FAR', fontsize=14)  
-            ax2.xaxis.set_label_coords(.5, -.15)
-            ax2.set_xlim([-1.8, 0])
-            #ax2.set_xlim([0.25, 1.25])
-            ax2.set_ylim([0.93, 1.005])
-             
-            
-            ax2.grid(True)
-            g1 = ax2.grid(visible=True, which='major', color='k', linestyle='-', alpha=0.45, linewidth=0.5)
-            g2 = ax2.grid(visible=True, which='minor', color='k', linestyle='-', alpha=0.25, linewidth=0.2)
-            ax2.minorticks_on()
-            ax2.yaxis.set_tick_params(labelleft=False, labelright=True)
-            
-            # reordering the labels 
-            handles, labels = plt.gca().get_legend_handles_labels() 
-            
-            # specify order 
-            order = [3, 0, 4, 2, 1] 
-            
-            
-            
-            # pass handle & labels lists along with order as below 
-            ax2.legend([handles[i] for i in order], [labels[i] for i in order],facecolor="pink") 
+    ax.legend(auc_handles, auc_labels, loc='lower center', bbox_to_anchor=(0.5, 1.0),
+              fancybox=True, shadow=True, ncol=2, fontsize=10, title="Methods")
 
-
-            ax2.legend(loc='lower center', bbox_to_anchor=(0.5, 1), fancybox=True, shadow=True, ncol=2)
-           
-            fig.subplots_adjust(bottom=0.2)
-            fig.savefig(pathOut + 'Plot_ROC.png', dpi=DPI)
-    plt.show()      
-
-        
-
-            
-    
-    
+    fig.subplots_adjust(bottom=0.2, top=0.85)
+    os.makedirs(pathOut, exist_ok=True)
+    fig.savefig(os.path.join(pathOut, 'ROC_MSAR_All.png'), dpi=600)
+    plt.show()

@@ -185,7 +185,7 @@ if __name__ == "__main__":
             # Ajustar limite horizontal com base nos dados
             xmin = np.percentile(all_values, 0.5)
             xmax = np.percentile(all_values, 99.5)
-            ax.set_xlim([xmin, xmax])
+            ax.set_xlim([0, xmax])
 
             ax.set_title(f'{Test} / {Test_h} PDF', fontsize=22)
             ax.set_ylabel('Density', fontsize=20)
