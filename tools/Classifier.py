@@ -1,20 +1,29 @@
 from __future__ import division
+
+# NumPy & SciPy
 import numpy as np
-import time
-from numpy import zeros,sqrt, mean,linspace,concatenate, cumsum
+from numpy import zeros, sqrt, mean, linspace, concatenate, cumsum
 from scipy.stats import norm
-import cv2
-from matplotlib import pyplot as plt
-import scipy.io as sio
-from PIL import Image
-from skimage import data
-from skimage.morphology import disk
-from skimage.filters.rank import median
-import cv2
-from load_data import load_data
-from scipy.spatial import distance
 from scipy.spatial.distance import cdist
 
+# Image Processing
+import cv2
+from PIL import Image
+from skimage.morphology import disk
+from skimage.filters.rank import median
+
+# Plotting
+import matplotlib.pyplot as plt
+
+# Data Handling
+import scipy.io as sio
+
+# Custom module
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from tools.load_data import load_data
 
 
 def Classifier(ICD,tp,pfa, TestType):
