@@ -88,7 +88,7 @@ def load_sample(test_type):
         
     return par
 
-# res =load_data('MSAR')[0]
+# res =load_sample('MSAR')[0]
 # tp=res[23]; tp =  np.fliplr(tp); TP =res[24]
 
 # Itest = res[21]
@@ -104,8 +104,24 @@ def load_sample(test_type):
 # plt.axis("off")
 
 
+# print(len(tp))
 
-# plt.show() 
+
+# #plt.show() 
+
+# # tp3
+
+
+
+# offset_y = 2050
+
+# # # offset horizontal (colunas)
+# offset_x = 1100
+
+# # # Supondo que os pontos estão no formato (x, y) ou (coluna, linha):
+# tp_adjusted = tp - np.array([offset_x, offset_y])
+
+# print(tp_adjusted)
             
     
 

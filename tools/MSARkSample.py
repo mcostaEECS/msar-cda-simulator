@@ -602,7 +602,7 @@ def MSARkSample(Data):
     resARAvg3=moving_average(ICD3, K)
     resARAvgVecC3= resARAvg3.ravel()
     
-    resARAvgVecC3= ICD3.ravel()
+    resARAvgVecC3= resARAvgVecC3.ravel()
       
    
     
@@ -611,7 +611,7 @@ def MSARkSample(Data):
     x_p = np.percentile(resARAvgVecC3, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(resARAvgVecC3, [25, 90]) #25, 75
+    quartile_1, quartile_3 = np.percentile(resARAvgVecC3, [25, 75]) #25, 75
     
     iqr = quartile_3 - quartile_1
     
@@ -633,7 +633,7 @@ def MSARkSample(Data):
     ICD=np.reshape(arraylist[0], (N, N))
     
  
-    return ICD,  ICD3, upper_bound
+    return ICD  #,  ICD3, upper_bound
   
   
    
