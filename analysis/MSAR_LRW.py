@@ -62,7 +62,6 @@ def moving_average(im, K):
     Filtered_data = cv2.filter2D(src=im, ddepth=-1, kernel=kernel1) 
     return Filtered_data
 
-#omitting the sample
 
 
 def randomwalk1D(ItestCT,arLAGS):
@@ -88,11 +87,11 @@ def randomwalk1D(ItestCT,arLAGS):
         # Move the object up or down
         if cmp < 1.2:
             TAG = 'UP'
-            y1 = test2(ItestCT, arLAGS[i], TAG)
+            y1 = AR1LRW(ItestCT, arLAGS[i], TAG)
             y = np.mean(y1)
         else:
             TAG = 'DOWN'
-            y1 = test2(ItestCT, arLAGS[i], TAG)
+            y1 = AR1LRW(ItestCT, arLAGS[i], TAG)
             y = np.mean(y1)
             
         a = np.cumsum(y)
@@ -132,7 +131,7 @@ def test(Itest, Iref):
 
 
 
-def test2(Itest, Iref, TAG):
+def AR1LRW(Itest, Iref, TAG):
     
  
      
@@ -257,62 +256,62 @@ def MCnAR1LT2(Data):
     
     rw = randomwalk1D(ItestCT,arLags)
     
-    # IdxLT = sorted(range(len(rw[1][1:])), key=lambda sub: rw[1][1:][sub], reverse=False)[:4]
+    IdxLT = sorted(range(len(rw[1][1:])), key=lambda sub: rw[1][1:][sub], reverse=False)[:4]
     
 
     
-    # arLTmin1 = test(ItestCT, arLags[IdxLT[0]+1])
-    # arLTmin2 = test(ItestCT, arLags[IdxLT[1]+1])
-    # arLTmin3 = test(ItestCT, arLags[IdxLT[2]+1])
+    arLTmin1 = test(ItestCT, arLags[IdxLT[0]+1])
+    arLTmin2 = test(ItestCT, arLags[IdxLT[1]+1])
+    arLTmin3 = test(ItestCT, arLags[IdxLT[2]+1])
     
     
     ar19 = test(ItestCT, IrefS);ar20 = test(ItestCT, IrefT);ar21 = test(ItestCT, IrefU)
     ar22 = test(ItestCT, IrefV);ar23 = test(ItestCT, IrefX) 
     
     
-    # p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin1).flatten())[0][1])
-    # p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin2).flatten())[0][1])
-    # p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin3).flatten())[0][1])
+    p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin1).flatten())[0][1])
+    p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin2).flatten())[0][1])
+    p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(arLTmin3).flatten())[0][1])
     
     
-    ar1 = test(ItestCT, IrefA);ar2 = test(ItestCT, IrefB);ar3 = test(ItestCT, IrefC)
-    ar4 = test(ItestCT, IrefD);ar5 = test(ItestCT, IrefE);ar6 = test(ItestCT, IrefF)
+    # ar1 = test(ItestCT, IrefA);ar2 = test(ItestCT, IrefB);ar3 = test(ItestCT, IrefC)
+    # ar4 = test(ItestCT, IrefD);ar5 = test(ItestCT, IrefE);ar6 = test(ItestCT, IrefF)
      
-    ar7 = test(ItestCT, IrefG);ar8 = test(ItestCT, IrefH);ar9 = test(ItestCT, IrefI)
-    ar10 = test(ItestCT, IrefJ);ar11 = test(ItestCT, IrefK);ar12 = test(ItestCT, IrefL) 
+    # ar7 = test(ItestCT, IrefG);ar8 = test(ItestCT, IrefH);ar9 = test(ItestCT, IrefI)
+    # ar10 = test(ItestCT, IrefJ);ar11 = test(ItestCT, IrefK);ar12 = test(ItestCT, IrefL) 
     
-    ar13 = test(ItestCT, IrefM);ar14 = test(ItestCT, IrefN);ar15 = test(ItestCT, IrefO)
-    ar16 = test(ItestCT, IrefP);ar17 = test(ItestCT, IrefQ);ar18 = test(ItestCT, IrefR) 
-    
-
-    
-    
-    p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar1).flatten())[0][1])
-    p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar2).flatten())[0][1])
-    p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar3).flatten())[0][1])
-    p4 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar4).flatten())[0][1])
-    p5 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar5).flatten())[0][1])
-    p6 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar6).flatten())[0][1])
-    
-    p7 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar7).flatten())[0][1])
-    p8 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar8).flatten())[0][1])
-    p9 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar9).flatten())[0][1])
-    p10 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar10).flatten())[0][1])
-    p11 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar11).flatten())[0][1])
-    p12 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar12).flatten())[0][1])
-    
-    p13 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar13).flatten())[0][1])
-    p14 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar14).flatten())[0][1])
-    p15 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar15).flatten())[0][1])
-    p16 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar16).flatten())[0][1])
-    p17 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar17).flatten())[0][1])
-    p18 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar18).flatten())[0][1])
+    # ar13 = test(ItestCT, IrefM);ar14 = test(ItestCT, IrefN);ar15 = test(ItestCT, IrefO)
+    # ar16 = test(ItestCT, IrefP);ar17 = test(ItestCT, IrefQ);ar18 = test(ItestCT, IrefR) 
     
 
     
     
-    pLT = [p1,p2,p3,p4, p5, p6, p7, p8, p9,p10,p11,p12, p13, p14, p15, p16, p17, p18]                      
-    arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
+    # p1 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar1).flatten())[0][1])
+    # p2 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar2).flatten())[0][1])
+    # p3 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar3).flatten())[0][1])
+    # p4 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar4).flatten())[0][1])
+    # p5 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar5).flatten())[0][1])
+    # p6 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar6).flatten())[0][1])
+    
+    # p7 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar7).flatten())[0][1])
+    # p8 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar8).flatten())[0][1])
+    # p9 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar9).flatten())[0][1])
+    # p10 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar10).flatten())[0][1])
+    # p11 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar11).flatten())[0][1])
+    # p12 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar12).flatten())[0][1])
+    
+    # p13 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar13).flatten())[0][1])
+    # p14 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar14).flatten())[0][1])
+    # p15 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar15).flatten())[0][1])
+    # p16 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar16).flatten())[0][1])
+    # p17 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar17).flatten())[0][1])
+    # p18 = abs(np.corrcoef(np.array(ItestCT).flatten(),np.array(ar18).flatten())[0][1])
+    
+
+    
+    
+    # pLT = [p1,p2,p3,p4, p5, p6, p7, p8, p9,p10,p11,p12, p13, p14, p15, p16, p17, p18]                      
+    # arLT = [ar1, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, ar15, ar16, ar17, ar18]
       
   
     
@@ -333,7 +332,7 @@ def MCnAR1LT2(Data):
    
     IdxST = sorted(range(len(pST)), key=lambda sub: pST[sub], reverse=True)[:4]  # sorting
     
-    IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
+    #IdxLT = sorted(range(len(pLT)), key=lambda sub: pLT[sub], reverse=False)[:4]  # sorting
     criteria = ['avg', 'min']
     criteria = criteria[0]
     
@@ -344,15 +343,15 @@ def MCnAR1LT2(Data):
     for i in range(len(TestVec)):
         if test_type == 'CTh':
             ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])/2
-            #LT1 = (arLTmin1[0] + arLTmin2[0])/2
-            LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
+            LT1 = (arLTmin1[0] + arLTmin2[0])/2
+            #LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
             
             res = ST1 - LT1 # change map from clutter reduction
             
         else:
             ST1 = (arST[IdxST[0]][i] + arST[IdxST[1]][i])/2
-            #LT1 = (arLTmin1[0] + arLTmin2[0])/2
-            LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
+            LT1 = (arLTmin1[0] + arLTmin2[0])/2
+            #LT1 = (arLT[IdxLT[0]][i] + arLT[IdxLT[1]][i])/2
             
             res = ST1 - LT1 # change map from clutter reduction
 
@@ -575,13 +574,13 @@ if __name__ == "__main__":
         REP.append(r)
         
        
-        fig = plt.figure('test')
-        plt.suptitle('REF / TEST / Change')
+        # fig = plt.figure('test')
+        # plt.suptitle('REF / TEST / Change')
         
-        ax = fig.add_subplot(1, 1, 1)
-        plt.imshow(ICD3, cmap = plt.cm.gray)
-        plt.axis("off")
-        plt.show()
+        # ax = fig.add_subplot(1, 1, 1)
+        # plt.imshow(ICD3, cmap = plt.cm.gray)
+        # plt.axis("off")
+        # plt.show()
                 
         
               
