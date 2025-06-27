@@ -133,93 +133,61 @@ def smooth(y, box_pts):
     box = np.ones(box_pts)/box_pts
     y_smooth = np.convolve(y, box, mode='same')
     return y_smooth
-    
-      
+
+
 
 if __name__ == "__main__":
-    
-    
+
     test_type = ['MSAR', 'MSARk', 'MSARh', 'MSARkh']
-    h = ['free', 'noise', 'correct']
-    block = [100, 125]; K=9
-    
- 
-    
-     
-        
- # # #------------------------ Graphic Analysis -------------------------#
- 
+    h_conditions = ['free', 'noise', 'correct']
+    N = 125
+    K = 9
+    DPI = 300
+
+    # Estilo dos plots
     plt.rc('text', usetex=True)
-    DPI =300
+    SMALL_SIZE = 22
+    plt.rc('xtick', labelsize=SMALL_SIZE)
+    plt.rc('ytick', labelsize=SMALL_SIZE)
 
+    fig, axes = plt.subplots(2, 3, figsize=(16, 9), dpi=DPI)
+    fig.subplots_adjust(hspace=0.45, wspace=0.35)
 
-    SMALL_SIZE = 30
-    MEDIUM_SIZE = 30
-    BIGGER_SIZE = 30
-
-    plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    
-    
-
-    
- 
     with plt.style.context(['science', 'ieee', 'std-colors']):
-            
-            fig, ax1 = plt.subplots(1, 1, figsize=(8,8), dpi=DPI) #, constrained_layout=True)
-            ax1.set_prop_cycle(color=['rosybrown', 'slategray', 'red', 'gray']) #linewidth=2
-            
-            h = h[0] # 0,1,2
-            
-            if h=='free':
-                ct = r'$C\to T$'
-                cc = r'$C\to C$'
-                
-            elif h=='noise':
-                ct = r'$C_{\textnormal{int}}\to T_{\textnormal{int}}$'
-                cc = r'$C_{\textnormal{int}} \to C_{\textnormal{int}}$'
-                
-            elif h=='correct':
-                ct = r'$C_{\textnormal{int}}^{h}\to T_{\textnormal{int}}^{h}$'
-                cc = r'$C_{\textnormal{int}}^{h} \to C_{\textnormal{int}}^{h}$'
-                
-            
-            Test = test_type[0] # h=0 [Test=0,1]; h=1 [Test=0,1]; h=2 [Test=2,3]
-            
-            ax1.plot(cdaTest(Test, h, 125, K)[0][0:5000], color='rosybrown', linewidth=2,  alpha=0.6, label=ct)
-            ax1.plot(cdaTest(Test, h, 125, K)[1][0:5000], color='slategray', linewidth=2,  alpha=0.8,label=cc)
-    
-            ax1.legend(prop={'size': 20})
-        
-            #ax1.invert_xaxis()
-            ax1.set_ylabel(r'Magnitue', fontsize=30)  
-            ax1.set_xlabel(r'pixels [$1\times N$]', fontsize=30)  
-            ax1.xaxis.set_label_coords(.5, -0.085)
-            ax1.yaxis.set_label_coords(-0.10, 0.5)
+        for j, h in enumerate(h_conditions):
+            # --- Linha 1: MSAR, MSAR, MSARh ---
+            if h in ['free', 'noise']:
+                Test_upper = test_type[0]  # MSAR
+            else:
+                Test_upper = test_type[2]  # MSARh
 
-    path='results/plots/'
-    namefile = 'Vector_%s_Int_%s.png'%(Test,h)
- 
-    fig.savefig(path + namefile, dpi=DPI)
-    #fig.tight_layout()
-            
-          
+            ct_label = r'$C\to T$' if h == 'free' else r'$C_{\textnormal{int}}\to T_{\textnormal{int}}$' if h == 'noise' else r'$C_{\textnormal{int}}^{h}\to T_{\textnormal{int}}^{h}$'
+            cc_label = r'$C\to C$' if h == 'free' else r'$C_{\textnormal{int}}\to C_{\textnormal{int}}$' if h == 'noise' else r'$C_{\textnormal{int}}^{h}\to C_{\textnormal{int}}^{h}$'
 
-    plt.show()      
+            res_CT, res_CC, _ = cdaTest(Test_upper, h, N, K)
+            axes[0][j].plot(res_CT[:5000], color='rosybrown', linewidth=2, alpha=0.7, label=ct_label)
+            axes[0][j].plot(res_CC[:5000], color='slategray', linewidth=2, alpha=0.9, label=cc_label)
+            axes[0][j].set_title(f'{Test_upper} | h = {h}', fontsize=20)
+            axes[0][j].legend(prop={'size': 12})
+            axes[0][j].set_ylabel('Magnitude', fontsize=16)
+            axes[0][j].set_xlabel(r'pixels [$1\times N$]', fontsize=16)
 
-            
-        
-    
- 
+            # --- Linha 2: MSARk, MSARk, MSARkh ---
+            Test_lower = test_type[1] if h in ['free', 'noise'] else test_type[3]
 
+            res_CT, res_CC, _ = cdaTest(Test_lower, h, N, K)
+            axes[1][j].plot(res_CT[:5000], color='rosybrown', linewidth=2, alpha=0.7, label=ct_label)
+            axes[1][j].plot(res_CC[:5000], color='slategray', linewidth=2, alpha=0.9, label=cc_label)
+            axes[1][j].set_title(f'{Test_lower} | h = {h}', fontsize=20)
+            axes[1][j].legend(prop={'size': 12})
+            axes[1][j].set_ylabel('Magnitude', fontsize=16)
+            axes[1][j].set_xlabel(r'pixels [$1\times N$]', fontsize=16)
 
+    fig.suptitle(r'MSAR Variants Comparison under Clutter Conditions', fontsize=24, y=0.98)
 
+    path = 'results/plots/'
+    os.makedirs(path, exist_ok=True)
+    fig.savefig(os.path.join(path, 'Vector_MSAR_2x3_corrected.png'), bbox_inches='tight', dpi=DPI)
 
-
-
-
-
-
-
-
+    plt.show()
 

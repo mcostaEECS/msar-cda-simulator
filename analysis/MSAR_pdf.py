@@ -14,6 +14,11 @@ import scipy.io as sio
 from scipy.stats import norm
 from scipy.spatial.distance import cdist
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import os
+
 # --- Image and Raster Processing --- #
 import cv2
 from PIL import Image
@@ -130,92 +135,69 @@ def cdaTest(test_type, h, N, K):
     #resSupCT.ravel(), resSupCC.ravel(), upper_bound
     
     
-    
-      
-
 if __name__ == "__main__":
-    
+
     test_type = ['MSAR', 'MSARk', 'MSARh', 'MSARkh']
-    h = ['free', 'noise', 'correct']
-    block = [100, 125]; K=9
-    
-    
-   
-   
-    
-    
-     
-        
- # # #------------------------ Graphic Analysis -------------------------#
- 
+    h_conditions = ['free', 'noise', 'correct']
+    N = 125
+    K = 9
+    DPI = 300
+
     plt.rc('text', usetex=True)
-    DPI =300
+    SMALL_SIZE = 24
+    plt.rc('xtick', labelsize=SMALL_SIZE)
+    plt.rc('ytick', labelsize=SMALL_SIZE)
 
+    # Labels
+    ct = [r'$T$', r'$T_{\textnormal{int}}$', r'$T_{\textnormal{int}}^{h}$']
+    cc = [r'$C$', r'$C_{\textnormal{int}}$', r'$C_{\textnormal{int}}^{h}$']
+    clutter_styles = ['solid', 'dotted', 'dashdot']
 
-    SMALL_SIZE = 30
-    MEDIUM_SIZE = 30
-    BIGGER_SIZE = 30
+    fig, axes = plt.subplots(2, 1, figsize=(10, 10), dpi=DPI)
+    fig.subplots_adjust(hspace=0.35)
 
-    plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
-    
-    N = 100
-
-    
- 
     with plt.style.context(['science', 'ieee', 'std-colors']):
-            
-            fig, ax2 = plt.subplots(1, 1, figsize=(8,8), dpi=DPI) #, constrained_layout=True)
-            ax2.set_prop_cycle(color=['rosybrown', 'slategray', 'red', 'gray']) #linewidth=2
-            
-            ct = [r'$T$', r'$T_{\textnormal{int}}$',r'$ T_{\textnormal{int}}^{h}$' ]
-            cc = [r'$C$', r'$C_{\textnormal{int}}$', r'$C_{\textnormal{int}}^{h}$']
-    
-                
-    
-            
-            meanColor = ['k', 'navy'] 
-            ax2.set_prop_cycle(color=['slategray', 'rosybrown', 'red', 'gray']) #linewidth=2
-            
-            Test = 'MSARk'
-            
-            sns.kdeplot(np.array(cdaTest(Test, 'free', 125, K)[1][0:5000]),color='slategray', lw=2,  alpha=0.8,ax=ax2, label=cc[0]) 
-            sns.kdeplot(np.array(cdaTest(Test, 'noise', 125, K)[1][0:5000]),color='slategray',lw=2, linestyle='dotted', alpha=0.8,ax=ax2, label=cc[2])  
-            sns.kdeplot(np.array(cdaTest(Test+'h', 'correct', 125, K)[1][0:5000]),color='slategray', linestyle='dashdot', marker='o', alpha=0.25,ax=ax2, label=cc[1]) 
-            
-            sns.kdeplot(np.array(cdaTest(Test, 'free', 125, K)[0][0:5000][0:5000]), color='rosybrown', lw=2, alpha=0.8,ax=ax2, label=ct[0]) 
-            sns.kdeplot(np.array(cdaTest(Test, 'noise', 125, K)[0][0:5000]),color='rosybrown', lw=2, linestyle='dotted', alpha=0.8,ax=ax2, label=ct[2]) 
-            sns.kdeplot(np.array(cdaTest(Test+'h', 'correct', 125, K)[0][0:5000]),color='rosybrown', alpha=0.25,  marker='o', linestyle='dashdot',ax=ax2, label=ct[1]) 
+        for row, Test in enumerate(['MSAR', 'MSARk']):
+            ax = axes[row]
+            ax.set_prop_cycle(color=['slategray', 'rosybrown'])
 
-            upperB= cdaTest(Test, 'free', 125, K)[2]
+            all_values = []
 
-            ax2.axvline(upperB, 0,1, color='red', alpha=0.35, label=r'threshold=%.2f'%upperB) 
-            
-        
-           
-           
-           
-            ax2.legend(prop={'size': 20})
-            ax2.set_ylabel(r'Density', fontsize=30)  
-            ax2.yaxis.set_label_position("right")
-            ax2.set_xlabel(r'Standardized value (z-score)', fontsize=30)  
-            ax2.xaxis.set_label_coords(.5, -.085)
-            ax2.yaxis.set_label_coords(-0.10, 0.5)
-            ax2.set_xlim([0.005, upperB+0.025])
-            ax2.yaxis.set_tick_params(labelleft=False, labelright=True)
+            for i, h in enumerate(h_conditions):
+                if h == 'correct':
+                    Test_h = 'MSARh' if Test == 'MSAR' else 'MSARkh'
+                else:
+                    Test_h = Test
 
-    path='results/plots/'
-    namefile = 'PDF_%s.png'%(Test)
- 
-    fig.savefig(path + namefile, dpi=DPI)
-    #fig.tight_layout()
-            
-          
+                # Dados
+                CT = np.array(cdaTest(Test_h, h, N, K)[0][:5000])
+                CC = np.array(cdaTest(Test_h, h, N, K)[1][:5000])
+                all_values.extend(CT)
+                all_values.extend(CC)
 
-    plt.show()      
+                sns.kdeplot(CC, ax=ax, color='slategray', lw=2, linestyle=clutter_styles[i], label=cc[i])
+                sns.kdeplot(CT, ax=ax, color='rosybrown', lw=2, linestyle=clutter_styles[i], label=ct[i])
 
-            
-        
-    
- 
+                if h == 'free':
+                    upperB = cdaTest(Test, 'free', N, K)[2]
+                    ax.axvline(upperB, 0, 1, color='red', alpha=0.4, linestyle='--', label=r'th=%.2f' % upperB)
 
+            # Ajustar limite horizontal com base nos dados
+            xmin = np.percentile(all_values, 0.5)
+            xmax = np.percentile(all_values, 99.5)
+            ax.set_xlim([xmin, xmax])
+
+            ax.set_title(f'{Test} / {Test_h} PDF', fontsize=22)
+            ax.set_ylabel('Density', fontsize=20)
+            ax.set_xlabel('Standardized value (z-score)', fontsize=20)
+            ax.legend(prop={'size': 12}, loc='upper right')
+            ax.yaxis.set_tick_params(labelleft=True, labelright=False)
+
+    fig.suptitle('Estimated PDFs of Change Magnitudes (MSAR vs MSARk)', fontsize=24, y=0.97)
+
+    # Salvar figura
+    path = 'results/plots/'
+    os.makedirs(path, exist_ok=True)
+    fig.savefig(os.path.join(path, 'PDF_2x1_MSAR_MSARk.png'), dpi=DPI, bbox_inches='tight')
+
+    plt.show()
