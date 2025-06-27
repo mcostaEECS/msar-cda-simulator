@@ -222,7 +222,7 @@ if __name__ == "__main__":
             
             # specify order 
             order = [3, 0, 4, 2, 1] 
-            order = [0, 1, 2]
+            order = [0, 1, 2, 3]
             
             
             # pass handle & labels lists along with order as below 
