@@ -56,6 +56,14 @@ def subarrays(arr, nrows, ncols):
                .swapaxes(1,2)
                .reshape(-1, nrows, ncols))
     
+def moving_average(im, K):
+    kernel1 = np.ones((K,K),np.float32)/(K**2)
+    Filtered_data = cv2.filter2D(src=im, ddepth=-1, kernel=kernel1) 
+    return Filtered_data
+    
+  
+
+    
 
 def cdaTest(test_type, h, N, K):
     
@@ -120,7 +128,7 @@ def cdaTest(test_type, h, N, K):
     Data = [ItestSub[p], IrefA[p], IrefB[p], IrefC[p], IrefD[p], IrefE[p], IrefF[p], IrefG[p],
                     IrefH[p],IrefI[p], IrefJ[p], IrefK[p], IrefL[p], IrefM[p], IrefN[p], IrefO[p], 
                     IrefP[p], IrefQ[p],IrefR[p], IrefS[p], IrefT[p], IrefU[p], IrefV[p], IrefX[p], 
-                    TP, N, K,s, test_type]
+                    TP, N, K,s, test_type, h]
                 
     resAvgCT = MSARkSample(Data)[0]
     resSupCT = MSARkSample(Data)[1]

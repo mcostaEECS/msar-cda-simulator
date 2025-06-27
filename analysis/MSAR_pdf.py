@@ -115,7 +115,7 @@ def cdaTest(test_type, h, N, K):
     Data = [ItestSub[p], IrefA[p], IrefB[p], IrefC[p], IrefD[p], IrefE[p], IrefF[p], IrefG[p],
                     IrefH[p],IrefI[p], IrefJ[p], IrefK[p], IrefL[p], IrefM[p], IrefN[p], IrefO[p], 
                     IrefP[p], IrefQ[p],IrefR[p], IrefS[p], IrefT[p], IrefU[p], IrefV[p], IrefX[p], 
-                    TP, N, K,s, test_type]
+                    TP, N, K,s, test_type, h]
                 
     resAvgCC = MSARkSample(Data)[0]
     resSupCC = MSARkSample(Data)[1]
@@ -125,7 +125,7 @@ def cdaTest(test_type, h, N, K):
     Data = [ItestSub[p], IrefA[p], IrefB[p], IrefC[p], IrefD[p], IrefE[p], IrefF[p], IrefG[p],
                     IrefH[p],IrefI[p], IrefJ[p], IrefK[p], IrefL[p], IrefM[p], IrefN[p], IrefO[p], 
                     IrefP[p], IrefQ[p],IrefR[p], IrefS[p], IrefT[p], IrefU[p], IrefV[p], IrefX[p], 
-                    TP, N, K,s, test_type]
+                    TP, N, K,s, test_type, h]
                 
     resAvgCT = MSARkSample(Data)[0]
     resSupCT = MSARkSample(Data)[1]

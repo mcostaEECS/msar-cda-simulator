@@ -144,16 +144,16 @@ if __name__ == "__main__":
     
     if test_type == 'MSAR':
         path = 'results/dataMSAR/dataMSAR_sample/'
-        pfa=1.0 # due \ell=1
+        pfa=2.2 # due \ell=1
         
         
     elif test_type == 'MSARk':
         path = 'results/dataMSARk/dataMSARk_sample/'
-        pfa=2.6 # due \ell=2
+        pfa=4.5 # due \ell=2
         
     elif test_type == 'MSARkh':
         path = 'results/dataMSARkh/dataMSARkh_sample/'
-        pfa=2.6 # due \ell=2
+        pfa=4.5 # due \ell=2
    
     name = 'ICD_%s_N_%d_K_%d_tp_%s_pair_%d'%(test_type,N,K,tp, pair)
 

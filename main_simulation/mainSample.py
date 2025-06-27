@@ -133,7 +133,9 @@ def msarSim(test_type, N, K, status):
             set_start_method('fork', force=True)
             try:
                 pool = Pool(8) 
-                CD = pool.starmap(MSARkSample, zip(IrefParallel[k])) 
+                CD = [r[0] for r in pool.starmap(MSARkSample, zip(IrefParallel[k]))]
+
+                #CD = pool.starmap(MSARkSample, zip(IrefParallel[k])) 
                 
                 
                 CDn.append(CD)

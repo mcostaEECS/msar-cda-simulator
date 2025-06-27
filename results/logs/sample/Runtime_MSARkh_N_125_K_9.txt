@@ -1,2 +1,3 @@
 MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.06014177073603091;runtime_total_1.383260726928711
 MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05603747782499894;runtime_total_1.2888619899749756
+MSARkh;N_125;K_9;pair_2;runtime_per_regime_0.05814860178076703;runtime_total_1.3374178409576416

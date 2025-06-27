@@ -77,7 +77,7 @@ def test(Itest, Iref, N,K):
 
 
 #------------------------- MS-AR(k,\ell,h) ------------------------#
-def MSARkSample(Data):
+def MSARkLRW(Data):
     
     # [Diversity/Test Training MS-AR(D,\ell,h)]
     Itest = Data[0]
@@ -598,51 +598,34 @@ def MSARkSample(Data):
     
     #------------------------- Anomaly Detection ------------------------#
 
-    OutSup = np.reshape(CDmcAvg, (N,N))
-    sf=moving_average(OutSup, K)
-    OutSupVec= OutSup.ravel()
+    ICD3 = np.reshape(CDmcAvg, (N,N))
+    resARAvg3=moving_average(ICD3, K)
+    resARAvgVecC3= ICD3.ravel()
     
-    OutAvgVec = sf.ravel()
-    
-  
+    resARAvgVecC3= resARAvgVecC3.ravel()
+      
+   
     
     ## IQR / Boxplot
     percentiles= np.array([75])
-    x_p = np.percentile(OutSupVec, percentiles)
+    x_p = np.percentile(resARAvgVecC3, percentiles)
     y_p = percentiles/100.0
     
-    quartile_1, quartile_3 = np.percentile(OutSupVec, [25, 75]) #25, 75
+    quartile_1, quartile_3 = np.percentile(resARAvgVecC3, [25, 75]) #25, 75
     
     iqr = quartile_3 - quartile_1
     
     lower_bound = quartile_1 - (iqr * 1.5)
     upper_bound = quartile_3 + (iqr * 1.5)
-    
-    
-    ## IQR / Boxplot
-    percentiles= np.array([75])
-    x_p = np.percentile(OutAvgVec, percentiles)
-    y_p = percentiles/100.0
-    
-    quartile_1, quartile_3 = np.percentile(OutAvgVec, [25, 75]) #25, 75
-    
-    iqr = quartile_3 - quartile_1
-    
-    lower_bound = quartile_1 - (iqr * 1.5)
-    upper_bound = quartile_3 + (iqr * 1.5)
-    
-    
-    
-    
       
     arraylist = []; Res = []; cnt=0; ths = 1
-    for i in range(len(OutAvgVec)):
-        if (OutAvgVec[i] >= lower_bound and OutAvgVec[i] <= upper_bound):
+    for i in range(len(resARAvgVecC3)):
+        if (resARAvgVecC3[i] >= lower_bound and resARAvgVecC3[i] <= upper_bound):
             res = 0
             Res.append(res)
        
         else:
-            res=OutAvgVec[i] 
+            res=resARAvgVecC3[i] 
             Res.append(res)
             
         arraylist.append(Res)
@@ -650,7 +633,7 @@ def MSARkSample(Data):
     ICD=np.reshape(arraylist[0], (N, N))
     
  
-    return ICD, OutSup, upper_bound
+    return ICD,  ICD3, upper_bound
   
   
    
