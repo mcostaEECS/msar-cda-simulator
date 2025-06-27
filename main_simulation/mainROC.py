@@ -171,7 +171,7 @@ if __name__ == "__main__":
     results['FAR_type.mat']=" ".join(str(x) for x in [FAR])
     results['Detection_pair.mat']=" ".join(str(x) for x in [RES])
         
-    scipy.io.savemat(id,results) 
+    sio.savemat(id,results) 
 
 
 
