@@ -1,23 +1,33 @@
 from __future__ import division
-import numpy as np
-from matplotlib import pyplot as plt
-import cv2
+
+# Core libraries
 import os
-from load_data import load_data
-import scipy.io as sio
-from skimage.morphology import disk
-from skimage.filters.rank import median
-from scipy.spatial.distance import cdist
-from scipy.special import erfcinv
 import re
-from matplotlib import pyplot as plt
-import array
-import scipy.io
-import scipy.io as io
 import math
+import array
+import numpy as np
 from ast import literal_eval
+
+# Visualization
+import matplotlib.pyplot as plt
 from matplotlib.cm import get_cmap
 from matplotlib.colors import LinearSegmentedColormap
+
+# Image processing
+import cv2
+from skimage.morphology import disk
+from skimage.filters.rank import median
+
+# Data handling and computation
+import scipy.io as sio
+from scipy.special import erfcinv
+from scipy.spatial.distance import cdist
+
+# Custom module
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from tools.load_data import load_data
 
 
 #------------------------- Morfological Filtering/Alarms computation ------------------------#

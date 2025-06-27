@@ -21,9 +21,15 @@ import pyprind
 from torch.multiprocessing import Pool, set_start_method, freeze_support
 from concurrent.futures import ProcessPoolExecutor
 
-# Custom modules
-from MSARk import MSARk
-from load_data import load_data
+
+# Custom module
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from tools.load_data import load_data
+from tools.MSARk import MSARk
+
 
 #------------------------- Split Image ------------------------#
 def subarrays(arr, nrows, ncols):
@@ -44,14 +50,14 @@ def msarSim(test_type, N, K):
     
     path = 'results/logs/'
 
-    nroPairs = 24
+    nroPairs = 1
     dimH = 3000; dimW = 2000
   
             
     TEST_time=[]; CFAR_time = []; Nop=[]
     bar = pyprind.ProgBar(nroPairs, monitor=True, title=campaign)
     for s in range(nroPairs):
-        #s = s + 15
+        s = s + 15
         
         
         par=load_data(test_type)[s]
