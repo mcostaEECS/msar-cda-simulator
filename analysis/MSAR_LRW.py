@@ -107,8 +107,6 @@ def randomwalk1D(ItestCT,arLAGS):
 
 def test(Itest, Iref):
     
- 
-     
     TestVec =Itest.ravel()
     RefVec = Iref.ravel()
     
