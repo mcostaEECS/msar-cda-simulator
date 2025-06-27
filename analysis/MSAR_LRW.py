@@ -228,7 +228,7 @@ def dataInput(test_type, N):
     
 
 
-def MCnAR1LT2(Data):
+def MSARk(Data):
     
     
         # [Diversity/Test Training MS-AR(D,\ell,h)]
@@ -245,7 +245,7 @@ def MCnAR1LT2(Data):
     test_type = Data[28]
     
     #ItestCT = par[25][start1:end1,start2:end2]  
-    ItestCT = MCnAR1D(Itest, ItestD, N,test_type )
+    ItestCT = MSARd(Itest, ItestD, N,test_type )
         
 
     
@@ -364,7 +364,7 @@ def MCnAR1LT2(Data):
 
 
 
-def MCnAR1D(ItestCT, ItestD, N,test_type):
+def MSARd(ItestCT, ItestD, N,test_type):
     
     IrefS = ItestD[0]; IrefT = ItestD[1]
     IrefU = ItestD[2]; IrefV = ItestD[3]
@@ -456,7 +456,7 @@ if __name__ == "__main__":
                 
                 
                 
-                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(dataInput(test_type[i],N)[0])
+                [resAvg,rw1,rw2, Test]  = MSARk(dataInput(test_type[i],N)[0])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
@@ -482,7 +482,7 @@ if __name__ == "__main__":
             elif test_type[i] == 'CC':
                 
                 
-                [resAvg,rw1,rw2, Test]  = MCnAR1LT2(dataInput(test_type[i],N)[1])
+                [resAvg,rw1,rw2, Test]  = MSARk(dataInput(test_type[i],N)[1])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
@@ -508,7 +508,7 @@ if __name__ == "__main__":
         
             elif test_type[i] == 'CTi':
                 
-                [resAvg,rw1,rw2, Test] = MCnAR1LT2(dataInput(test_type[i],N)[0])
+                [resAvg,rw1,rw2, Test] = MSARk(dataInput(test_type[i],N)[0])
                 
                 
                 
@@ -536,7 +536,7 @@ if __name__ == "__main__":
             elif test_type[i] == 'CTh':
                 
                 
-                [resAvg,rw1,rw2, Test] = MCnAR1LT2(dataInput(test_type[i], N)[0])
+                [resAvg,rw1,rw2, Test] = MSARk(dataInput(test_type[i], N)[0])
                 
                 cd =  resAvg.ravel()      
                 percentiles= np.array([75])
