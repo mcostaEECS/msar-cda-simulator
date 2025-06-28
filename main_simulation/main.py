@@ -184,9 +184,6 @@ if __name__ == "__main__":
     #'MSAR' = (k=11, d=5,\ell=1,h=0) 
     #'MSARk' = (k=23,d=5,\ell=2,h=0)
     #'MSARk' = (k=23,d=5,\ell=2,h=1)
-
-
-     
     test_type = ['MSAR', 'MSARk', 'MSARkh']
     test_type  = test_type[0]
     K = 9
