@@ -1,9 +1,13 @@
 # MS-AR(k) Change Detection Simulator
 
-This repository provides the Python implementation of the **Markov-Switching Autoregressive (MS-AR)** model for multi-temporal change detection, as proposed in the article:
+[![IEEE](https://img.shields.io/badge/IEEE-GRSL-8A2BE2)](https://ieeexplore.ieee.org/document/XXXXXXX)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/License-BSD--3--Clause-green)](LICENSE)
 
-> **"Generalized Multi-temporal Change Detection with Markov-switching Autoregressive (AR) Model"**  
-> _Marcello G. Costa et al., IEEE Journal Submission, 2025._
+Official implementation for the paper:  
+**"Generalized Multi-temporal Change Detection with Markov-switching Autoregressive (AR) Model"** (To be submitted to IEEE GRSL/TGRS)
+
+> This repository provides the Python implementation of the **Markov-Switching Autoregressive (MS-AR)** model for multi-temporal change detection, as proposed in the article:
 
 The simulator supports different MS-AR model variants, including:
 - `MSAR`  →  (k = 11, ℓ = 1, h = 0)  
