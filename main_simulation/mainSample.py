@@ -1,3 +1,15 @@
+"""
+Main simulation script for MSAR-based change detection algorithms.
+
+This script loads multitemporal image datasets with directional diversity,
+applies MS-AR(k,d,ℓ,h) models, and computes change detection maps (ICD)
+using multiprocessing. The outputs include .mat files with ICD results
+and runtime logs for performance assessment.
+
+Author: Marcello G. Costa  
+Institution: ITA / KTH (Visiting Researcher)  
+Date: 2025-04-22
+"""
 from __future__ import division
 
 # Core libraries
@@ -33,6 +45,17 @@ from tools.MSARkSample import MSARkSample
 
 #------------------------- Split Image ------------------------#
 def subarrays(arr, nrows, ncols):
+    """
+    Splits a 2D image array into non-overlapping subarrays.
+
+    Parameters:
+        arr (ndarray): Input 2D image.
+        nrows (int): Number of rows per subarray.
+        ncols (int): Number of columns per subarray.
+
+    Returns:
+        ndarray: Reshaped array with shape (blocks, nrows, ncols)
+    """
     h, w = arr.shape
     assert h % nrows == 0, f"{h} rows is not evenly divisible by {nrows}"
     assert w % ncols == 0, f"{w} cols is not evenly divisible by {ncols}"
@@ -46,8 +69,6 @@ def msarSim(test_type, N, K, status):
         s= 1
     elif status== 'noise':
         s = 2
-        
-    
       
     campaign = 'Runtime_%s_N_%d_K_%d'%(test_type, N, K)
     
@@ -187,10 +208,8 @@ if __name__ == "__main__":
     
     #'MSAR' = (k=11, d=5,\ell=1,h=0) 
     #'MSARk' = (k=23,d=5,\ell=2,h=0)
-    #'MSARk' = (k=23,d=5,\ell=2,h=1)
-
-
-     
+    #'MSARk' = (k=23,d=5,\ell=2,h=1) used with s=['noise']
+   
     test_type = ['MSAR', 'MSARk', 'MSARkh']
     s = ['free', 'noise']
     test_type  = test_type[2]

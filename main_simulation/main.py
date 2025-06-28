@@ -73,10 +73,7 @@ def msarSim(test_type, N, K):
 
     nroPairs = 24 # Set to 1 for testing, or 24 for full campaign
     dimH = 3000; dimW = 2000
-    
-    
-  
-            
+          
     TEST_time=[]; CFAR_time = []; Nop=[]
     bar = pyprind.ProgBar(nroPairs, monitor=True, title=campaign)
     for s in range(nroPairs):

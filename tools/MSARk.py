@@ -495,7 +495,7 @@ def MSARk(Data):
     ICD=np.reshape(arraylist[0], (N, N))
     
  
-    return ICD
+    return ICD, OutSup, upper_bound
   
   
    
